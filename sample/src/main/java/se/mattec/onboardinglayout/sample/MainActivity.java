@@ -1,7 +1,9 @@
-package se.mattec.onboardinglayout;
+package se.mattec.onboardinglayout.sample;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import se.mattec.onboardinglayout.R;
 
 public class MainActivity
         extends AppCompatActivity

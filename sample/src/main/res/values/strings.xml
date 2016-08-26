@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">OnboardingLayout</string>
+    <string name="open_onboarding">Open onboarding</string>
 </resources>

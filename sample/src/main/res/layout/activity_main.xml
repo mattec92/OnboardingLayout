@@ -8,12 +8,21 @@
     tools:context=".MainActivity">
 
     <Button
-        android:id="@+id/onboarding_button"
+        android:id="@+id/onboarding_show_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="100dp"
-        android:text="@string/open_onboarding"/>
+        android:text="@string/show_onboarding"/>
+
+    <Button
+        android:id="@+id/onboarding_clear_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="100dp"
+        android:text="@string/clear_onboarding"/>
 
     <View
         android:id="@+id/center_view"

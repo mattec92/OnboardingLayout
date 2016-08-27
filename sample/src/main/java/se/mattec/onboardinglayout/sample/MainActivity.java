@@ -13,12 +13,15 @@ public class MainActivity
 {
 
     private OnboardingLayout onboardingLayout;
-    private Button onboardingButton;
+    private Button onboardingShowButton;
+    private Button onboardingClearButton;
     private View centerView;
     private View topLeftView;
     private View topRightView;
     private View bottomLeftView;
     private View bottomRightView;
+
+    private Onboard.OnboardingScreen onboardingScreen;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -32,7 +35,8 @@ public class MainActivity
     private void initViews()
     {
         onboardingLayout = (OnboardingLayout) findViewById(R.id.onboarding_layout);
-        onboardingButton = (Button) findViewById(R.id.onboarding_button);
+        onboardingShowButton = (Button) findViewById(R.id.onboarding_show_button);
+        onboardingClearButton = (Button) findViewById(R.id.onboarding_clear_button);
         centerView = findViewById(R.id.center_view);
         topLeftView = findViewById(R.id.top_left_view);
         topRightView = findViewById(R.id.top_right_view);
@@ -42,7 +46,7 @@ public class MainActivity
 
     private void setupButton()
     {
-        onboardingButton.setOnClickListener(new View.OnClickListener()
+        onboardingShowButton.setOnClickListener(new View.OnClickListener()
         {
 
             @Override
@@ -51,11 +55,26 @@ public class MainActivity
                 openOnboarding();
             }
         });
+
+        onboardingClearButton.setOnClickListener(new View.OnClickListener()
+        {
+
+            @Override
+            public void onClick(View view)
+            {
+                if (onboardingScreen != null)
+                {
+                    onboardingScreen.clear();
+                }
+            }
+        });
     }
 
     private void openOnboarding()
     {
-        Onboard.in(onboardingLayout)
+        onboardingScreen = Onboard.in(onboardingLayout)
+                .withOverlayColor(R.color.black_trans)
+                .withTextColor(R.color.white)
                 .withText("Above the center")
                 .above(centerView)
                 .withText("Below the center")

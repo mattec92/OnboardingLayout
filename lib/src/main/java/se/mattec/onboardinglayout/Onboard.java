@@ -1,6 +1,7 @@
 package se.mattec.onboardinglayout;
 
 import android.content.Context;
+import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
@@ -26,6 +27,11 @@ public class Onboard
         private List<OnboardingElement> onboardingElements;
         private Context context;
 
+        private int backgroundColorResourceId = -1;
+        private int textColorResourceId = -1;
+
+        private View backgroundView;
+
         public OnboardingScreen(OnboardingLayout onboardingLayout)
         {
             this.onboardingLayout = onboardingLayout;
@@ -40,14 +46,48 @@ public class Onboard
             return textOnboardingElement;
         }
 
-        public void show()
+        public OnboardingScreen withOverlayColor(int backgroundColorResourceId)
         {
+            this.backgroundColorResourceId = backgroundColorResourceId;
+            return this;
+        }
+
+        public OnboardingScreen withTextColor(int textColorResourceId)
+        {
+            this.textColorResourceId = textColorResourceId;
+            return this;
+        }
+
+        public OnboardingScreen show()
+        {
+            if (backgroundColorResourceId != -1)
+            {
+                View backgroundView = new View(context);
+                backgroundView.setBackgroundResource(backgroundColorResourceId);
+                backgroundView.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+                onboardingLayout.addView(backgroundView);
+                this.backgroundView = backgroundView;
+            }
+
             for (OnboardingElement element : onboardingElements)
             {
                 onboardingLayout.addView(element.create());
             }
 
-            onboardingLayout.requestLayout();
+            return this;
+        }
+
+        public void clear()
+        {
+            for (OnboardingElement element : onboardingElements)
+            {
+                onboardingLayout.removeView(element.view);
+            }
+
+            if (backgroundView != null)
+            {
+                onboardingLayout.removeView(backgroundView);
+            }
         }
 
     }
@@ -65,6 +105,8 @@ public class Onboard
         protected int bottom;
         protected int left;
         protected int right;
+
+        protected View view;
 
         public OnboardingElement(OnboardingScreen onboardingScreen)
         {
@@ -139,6 +181,14 @@ public class Onboard
         {
             TextView textView = new TextView(context);
             textView.setText(text);
+
+            if (onboardingScreen.textColorResourceId != -1)
+            {
+                textView.setTextColor(ContextCompat.getColor(context, onboardingScreen.textColorResourceId));
+            }
+
+            view = textView;
+
             return textView;
         }
 

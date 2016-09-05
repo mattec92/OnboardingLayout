@@ -6,6 +6,7 @@ public enum Location
     ABOVE,
     BELOW,
     LEFT,
-    RIGHT
+    RIGHT,
+    AROUND
 
 }

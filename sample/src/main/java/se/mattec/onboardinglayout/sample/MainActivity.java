@@ -75,6 +75,7 @@ public class MainActivity
         onboardingScreen = Onboard.in(onboardingLayout)
                 .withOverlayColor(R.color.black_trans)
                 .withTextColor(R.color.white)
+                .withBorderColor(R.color.white)
                 .withText("Above the center")
                 .above(centerView)
                 .withText("Below the center")
@@ -99,6 +100,10 @@ public class MainActivity
                 .above(bottomRightView)
                 .withText("Left bottom right")
                 .left(bottomRightView)
+                .withBorder(true)
+                .around(topLeftView)
+                .withBorder(false)
+                .around(topRightView)
                 .show();
     }
 

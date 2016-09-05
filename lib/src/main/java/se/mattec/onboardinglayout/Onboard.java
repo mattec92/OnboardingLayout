@@ -31,6 +31,7 @@ public class Onboard
 
         private int backgroundColorResourceId = -1;
         private int textColorResourceId = -1;
+        private int borderColorResourceId = -1;
 
         private View backgroundView;
 
@@ -48,6 +49,13 @@ public class Onboard
             return textOnboardingElement;
         }
 
+        public BorderOnboardingElement withBorder(boolean dashed)
+        {
+            BorderOnboardingElement borderOnboardingElement = new BorderOnboardingElement(this, dashed);
+            onboardingElements.add(borderOnboardingElement);
+            return borderOnboardingElement;
+        }
+
         public OnboardingScreen withOverlayColor(int backgroundColorResourceId)
         {
             this.backgroundColorResourceId = backgroundColorResourceId;
@@ -57,6 +65,12 @@ public class Onboard
         public OnboardingScreen withTextColor(int textColorResourceId)
         {
             this.textColorResourceId = textColorResourceId;
+            return this;
+        }
+
+        public OnboardingScreen withBorderColor(int borderColorResourceId)
+        {
+            this.borderColorResourceId = borderColorResourceId;
             return this;
         }
 
@@ -116,34 +130,6 @@ public class Onboard
             this.context = onboardingScreen.context;
         }
 
-        public OnboardingScreen above(View view)
-        {
-            location = Location.ABOVE;
-            getLocation(view);
-            return onboardingScreen;
-        }
-
-        public OnboardingScreen below(View view)
-        {
-            location = Location.BELOW;
-            getLocation(view);
-            return onboardingScreen;
-        }
-
-        public OnboardingScreen left(View view)
-        {
-            location = Location.LEFT;
-            getLocation(view);
-            return onboardingScreen;
-        }
-
-        public OnboardingScreen right(View view)
-        {
-            location = Location.RIGHT;
-            getLocation(view);
-            return onboardingScreen;
-        }
-
         protected void getLocation(View view)
         {
             viewToAlign = view;
@@ -181,6 +167,34 @@ public class Onboard
         {
             super(onboardingScreen);
             this.text = text;
+        }
+
+        public OnboardingScreen above(View view)
+        {
+            location = Location.ABOVE;
+            getLocation(view);
+            return onboardingScreen;
+        }
+
+        public OnboardingScreen below(View view)
+        {
+            location = Location.BELOW;
+            getLocation(view);
+            return onboardingScreen;
+        }
+
+        public OnboardingScreen left(View view)
+        {
+            location = Location.LEFT;
+            getLocation(view);
+            return onboardingScreen;
+        }
+
+        public OnboardingScreen right(View view)
+        {
+            location = Location.RIGHT;
+            getLocation(view);
+            return onboardingScreen;
         }
 
         @Override
@@ -325,6 +339,70 @@ public class Onboard
             });
         }
 
+    }
+
+    public static class BorderOnboardingElement
+            extends OnboardingElement
+    {
+
+        private final boolean dashed;
+
+        public BorderOnboardingElement(OnboardingScreen onboardingScreen, boolean dashed)
+        {
+            super(onboardingScreen);
+            this.dashed = dashed;
+        }
+
+        public OnboardingScreen around(View view)
+        {
+            location = Location.AROUND;
+            getLocation(view);
+            return onboardingScreen;
+        }
+
+        @Override
+        protected View buildView()
+        {
+            View borderView = new View(context);
+
+            if (dashed)
+            {
+                borderView.setBackgroundResource(R.drawable.dashed_border);
+            }
+            else
+            {
+                borderView.setBackgroundResource(R.drawable.border);
+            }
+
+            if (onboardingScreen.borderColorResourceId != -1)
+            {
+                //TODO preserve transparency
+//                borderView.getBackground().setColorFilter(ContextCompat.getColor(context, onboardingScreen.borderColorResourceId), PorterDuff.Mode.SRC_IN);
+            }
+
+            view = borderView;
+
+            return borderView;
+        }
+
+        @Override
+        protected void positionView(View view)
+        {
+            final int onboardingLayoutWidth = onboardingScreen.onboardingLayout.getWidth();
+            final int onboardingLayoutHeight = onboardingScreen.onboardingLayout.getHeight();
+
+            int viewToAlignWidth = right - left;
+            final int viewToAlignHeight = bottom - top;
+
+            final OnboardingLayout.LayoutParams params = new OnboardingLayout.LayoutParams(viewToAlignWidth, viewToAlignHeight);
+
+            params.topMargin = top;
+            params.bottomMargin = onboardingLayoutHeight - bottom;
+            params.leftMargin = left;
+            params.rightMargin = onboardingLayoutWidth - right;
+
+            view.setLayoutParams(params);
+        }
     }
 
 }

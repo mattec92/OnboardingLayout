@@ -2,8 +2,10 @@ package se.mattec.onboardinglayout;
 
 import android.content.Context;
 import android.support.v4.content.ContextCompat;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -145,10 +147,15 @@ public class Onboard
         protected void getLocation(View view)
         {
             viewToAlign = view;
-            top = view.getTop();
-            bottom = view.getBottom();
-            left = view.getLeft();
-            right = view.getRight();
+
+            do
+            {
+                top += view.getTop();
+                bottom += view.getBottom();
+                left += view.getLeft();
+                right += view.getRight();
+            }
+            while (view.getParent() != onboardingScreen.onboardingLayout);
         }
 
         protected View create()
@@ -182,6 +189,9 @@ public class Onboard
             TextView textView = new TextView(context);
             textView.setText(text);
 
+            int padding = (int) context.getResources().getDimension(R.dimen.text_padding);
+            textView.setPadding(padding, padding, padding, padding);
+
             if (onboardingScreen.textColorResourceId != -1)
             {
                 textView.setTextColor(ContextCompat.getColor(context, onboardingScreen.textColorResourceId));
@@ -193,43 +203,126 @@ public class Onboard
         }
 
         @Override
-        protected void positionView(View view)
+        protected void positionView(final View view)
         {
-            OnboardingLayout.LayoutParams params = new OnboardingLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            final int onboardingLayoutWidth = onboardingScreen.onboardingLayout.getWidth();
+
+            int viewToAlignWidth = right - left;
+            final int viewToAlignHeight = bottom - top;
+
+            final int viewToAlignCenterHorizontal = left + viewToAlignWidth / 2;
+            int viewToAlignCenterVertical = top + viewToAlignHeight / 2;
+
+            final OnboardingLayout.LayoutParams params = new OnboardingLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 
             switch (location)
             {
                 case ABOVE:
                 {
-                    params.addRule(RelativeLayout.ABOVE, viewToAlign.getId());
-                    params.addRule(RelativeLayout.CENTER_HORIZONTAL);
-//                    params.bottomMargin = onboardingScreen.onboardingLayout.getHeight() - top;
+                    params.bottomMargin = onboardingScreen.onboardingLayout.getHeight() - top;
+                    params.gravity = Gravity.BOTTOM;
                     break;
                 }
                 case BELOW:
                 {
-                    params.addRule(RelativeLayout.BELOW, viewToAlign.getId());
-                    params.addRule(RelativeLayout.CENTER_HORIZONTAL);
-//                    params.topMargin = bottom;
+                    params.topMargin = bottom;
+                    params.gravity = Gravity.TOP;
                     break;
                 }
                 case LEFT:
                 {
-                    params.addRule(RelativeLayout.LEFT_OF, viewToAlign.getId());
-                    params.addRule(RelativeLayout.ALIGN_TOP, viewToAlign.getId());
-//                    params.rightMargin = left;
+                    params.rightMargin = onboardingLayoutWidth - left;
+                    params.topMargin = top;
+                    params.gravity = Gravity.RIGHT;
                     break;
                 }
                 case RIGHT:
                 {
-                    params.addRule(RelativeLayout.RIGHT_OF, viewToAlign.getId());
-                    params.addRule(RelativeLayout.ALIGN_TOP, viewToAlign.getId());
-//                    params.leftMargin = right;
+                    params.leftMargin = right;
+                    params.topMargin = top;
+                    params.gravity = Gravity.LEFT;
                     break;
                 }
             }
 
             view.setLayoutParams(params);
+
+            view.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener()
+            {
+                @Override
+                public void onGlobalLayout()
+                {
+                    int height = view.getHeight();
+                    int width = view.getWidth();
+
+                    switch (location)
+                    {
+
+                        case ABOVE:
+                        {
+                            //If there is enough place to center the view
+                            if (viewToAlignCenterHorizontal - width / 2 > 0)
+                            {
+                                if (viewToAlignCenterHorizontal + width / 2 < onboardingLayoutWidth)
+                                {
+                                    params.leftMargin = viewToAlignCenterHorizontal - width / 2;
+                                }
+                                else
+                                {
+                                    params.leftMargin = onboardingLayoutWidth - width;
+                                }
+                            }
+                            break;
+                        }
+                        case BELOW:
+                        {
+                            //If there is enough place to center the view
+                            if (viewToAlignCenterHorizontal - width / 2 > 0)
+                            {
+                                if (viewToAlignCenterHorizontal + width / 2 < onboardingLayoutWidth)
+                                {
+                                    params.leftMargin = viewToAlignCenterHorizontal - width / 2;
+                                }
+                                else
+                                {
+                                    params.leftMargin = onboardingLayoutWidth - width;
+                                }
+                            }
+                            break;
+                        }
+                        case LEFT:
+                        {
+                            //If the view is smaller than the view to align, center it inside the view
+                            if (height < viewToAlignHeight)
+                            {
+                                params.topMargin = top + (viewToAlignHeight - height) / 2;
+                            }
+                            //Otherwise center it outside the view.
+                            else
+                            {
+                                params.topMargin = top - (height - viewToAlignHeight) / 2;
+                            }
+                            break;
+                        }
+                        case RIGHT:
+                        {
+                            //If the view is smaller than the view to align, center it inside the view
+                            if (height < viewToAlignHeight)
+                            {
+                                params.topMargin = top + (viewToAlignHeight - height) / 2;
+                            }
+                            //Otherwise center it outside the view.
+                            else
+                            {
+                                params.topMargin = top - (height - viewToAlignHeight) / 2;
+                            }
+                            break;
+                        }
+                    }
+
+                    view.requestLayout();
+                }
+            });
         }
 
     }

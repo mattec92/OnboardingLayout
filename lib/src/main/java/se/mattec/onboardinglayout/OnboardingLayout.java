@@ -3,10 +3,9 @@ package se.mattec.onboardinglayout;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.widget.FrameLayout;
-import android.widget.RelativeLayout;
 
 public class OnboardingLayout
-        extends RelativeLayout
+        extends FrameLayout
 {
 
     private Onboard.OnboardingScreen currentOnboardingScreen;

@@ -38,14 +38,14 @@ public class TextOnboardingElement
         return onboardingScreen;
     }
 
-    public OnboardingScreen left(View view)
+    public OnboardingScreen toLeftOf(View view)
     {
         location = Location.LEFT;
         getLocation(view);
         return onboardingScreen;
     }
 
-    public OnboardingScreen right(View view)
+    public OnboardingScreen toRightOf(View view)
     {
         location = Location.RIGHT;
         getLocation(view);

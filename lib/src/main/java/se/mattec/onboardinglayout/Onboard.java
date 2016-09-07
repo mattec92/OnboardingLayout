@@ -119,12 +119,18 @@ public class Onboard
             for (OnboardingElement element : onboardingElements)
             {
                 onboardingLayout.removeView(element.view);
+                element.view = null;
             }
+
+            onboardingElements.clear();
 
             if (backgroundView != null)
             {
                 onboardingLayout.removeView(backgroundView);
+                backgroundView = null;
             }
+
+            onboardingLayout = null;
         }
 
     }
@@ -356,6 +362,7 @@ public class Onboard
                     }
 
                     view.requestLayout();
+                    view.getViewTreeObserver().removeOnGlobalLayoutListener(this);
                 }
             });
         }

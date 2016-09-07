@@ -6,8 +6,8 @@ import android.view.View;
 import android.widget.Button;
 
 import se.mattec.onboardinglayout.Onboard;
-import se.mattec.onboardinglayout.views.OnboardingLayout;
 import se.mattec.onboardinglayout.OnboardingScreen;
+import se.mattec.onboardinglayout.views.OnboardingLayout;
 
 public class MainActivity
         extends AppCompatActivity
@@ -93,8 +93,10 @@ public class MainActivity
                 .withText("Right bottom left").right(bottomLeftView)
                 .withText("Above bottom right").above(bottomRightView)
                 .withText("Left bottom right").left(bottomRightView)
-                .withBorder(true).around(topLeftView)
-                .withBorder(false).around(topRightView)
+                .withBorder(true, true).around(topLeftView)
+                .withBorder(false, false).around(topRightView)
+                .withBorder(true, false).around(bottomRightView)
+                .withBorder(false, true).around(bottomLeftView)
                 .withHole(true).around(bottomLeftView)
                 .withHole(false).around(bottomRightView)
                 .show();

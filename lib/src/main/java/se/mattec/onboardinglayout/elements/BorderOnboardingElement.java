@@ -3,20 +3,22 @@ package se.mattec.onboardinglayout.elements;
 import android.view.View;
 import android.widget.FrameLayout;
 
-import se.mattec.onboardinglayout.enums.Location;
 import se.mattec.onboardinglayout.OnboardingScreen;
 import se.mattec.onboardinglayout.R;
+import se.mattec.onboardinglayout.enums.Location;
 
 public class BorderOnboardingElement
         extends OnboardingElement
 {
 
-    private final boolean dashed;
+    private boolean isDashed;
+    private boolean oval;
 
-    public BorderOnboardingElement(OnboardingScreen onboardingScreen, boolean dashed)
+    public BorderOnboardingElement(OnboardingScreen onboardingScreen, boolean isDashed, boolean oval)
     {
         super(onboardingScreen);
-        this.dashed = dashed;
+        this.isDashed = isDashed;
+        this.oval = oval;
     }
 
     public OnboardingScreen around(View view)
@@ -31,13 +33,27 @@ public class BorderOnboardingElement
     {
         View borderView = new View(context);
 
-        if (dashed)
+        if (isDashed)
         {
-            borderView.setBackgroundResource(R.drawable.dashed_border);
+            if (oval)
+            {
+                borderView.setBackgroundResource(R.drawable.dashed_border_oval);
+            }
+            else
+            {
+                borderView.setBackgroundResource(R.drawable.dashed_border);
+            }
         }
         else
         {
-            borderView.setBackgroundResource(R.drawable.border);
+            if (oval)
+            {
+                borderView.setBackgroundResource(R.drawable.border_oval);
+            }
+            else
+            {
+                borderView.setBackgroundResource(R.drawable.border);
+            }
         }
 
         if (onboardingScreen.borderColorResourceId != -1)

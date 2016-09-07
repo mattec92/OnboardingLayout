@@ -42,9 +42,9 @@ public class OnboardingScreen
         return textOnboardingElement;
     }
 
-    public BorderOnboardingElement withBorder(boolean dashed)
+    public BorderOnboardingElement withBorder(boolean isDashed, boolean isCircular)
     {
-        BorderOnboardingElement borderOnboardingElement = new BorderOnboardingElement(this, dashed);
+        BorderOnboardingElement borderOnboardingElement = new BorderOnboardingElement(this, isDashed, isCircular);
         onboardingElements.add(borderOnboardingElement);
         return borderOnboardingElement;
     }

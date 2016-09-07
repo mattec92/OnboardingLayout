@@ -55,7 +55,7 @@ public class MainActivity
             {
                 if (onboardingScreen != null)
                 {
-                    onboardingScreen.clear();
+                    onboardingScreen.clear(true);
                 }
                 openOnboarding();
             }
@@ -69,7 +69,7 @@ public class MainActivity
             {
                 if (onboardingScreen != null)
                 {
-                    onboardingScreen.clear();
+                    onboardingScreen.clear(true);
                 }
             }
         });
@@ -99,7 +99,7 @@ public class MainActivity
                 .withBorder(false, true).around(bottomLeftView)
                 .withHole(true).around(bottomLeftView)
                 .withHole(false).around(bottomRightView)
-                .show();
+                .show(true);
     }
 
 }

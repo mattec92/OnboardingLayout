@@ -1,5 +1,7 @@
 package se.mattec.onboardinglayout;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
@@ -74,7 +76,7 @@ public class OnboardingScreen
         return this;
     }
 
-    public OnboardingScreen show()
+    public OnboardingScreen show(boolean animate)
     {
         if (backgroundColorResourceId != -1)
         {
@@ -93,6 +95,11 @@ public class OnboardingScreen
             backgroundView.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
             onboardingLayout.addView(backgroundView);
             this.backgroundView = backgroundView;
+
+            if (animate)
+            {
+                AnimationUtils.fadeIn(backgroundView);
+            }
         }
 
         for (OnboardingElement element : onboardingElements)
@@ -101,17 +108,39 @@ public class OnboardingScreen
             if (view != null)
             {
                 onboardingLayout.addView(view);
+                if (animate)
+                {
+                    AnimationUtils.fadeIn(view);
+                }
             }
         }
 
         return this;
     }
 
-    public void clear()
+    public void clear(boolean animate)
     {
-        for (OnboardingElement element : onboardingElements)
+        for (final OnboardingElement element : onboardingElements)
         {
-            onboardingLayout.removeView(element.getView());
+            if (element.getView() != null)
+            {
+                if (animate)
+                {
+                    AnimationUtils.fadeOut(element.getView(), new AnimatorListenerAdapter()
+                    {
+
+                        @Override
+                        public void onAnimationEnd(Animator animation)
+                        {
+                            onboardingLayout.removeView(element.getView());
+                        }
+                    });
+                }
+                else
+                {
+                    onboardingLayout.removeView(element.getView());
+                }
+            }
             element.clear();
         }
 
@@ -119,11 +148,25 @@ public class OnboardingScreen
 
         if (backgroundView != null)
         {
-            onboardingLayout.removeView(backgroundView);
-            backgroundView = null;
-        }
+            if (animate)
+            {
+                AnimationUtils.fadeOut(backgroundView, new AnimatorListenerAdapter()
+                {
 
-        onboardingLayout = null;
+                    @Override
+                    public void onAnimationEnd(Animator animation)
+                    {
+                        onboardingLayout.removeView(backgroundView);
+                        backgroundView = null;
+                    }
+                });
+            }
+            else
+            {
+                onboardingLayout.removeView(backgroundView);
+                backgroundView = null;
+            }
+        }
     }
 
     public Context getContext()

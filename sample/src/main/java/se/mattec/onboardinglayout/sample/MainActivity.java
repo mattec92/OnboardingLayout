@@ -52,6 +52,10 @@ public class MainActivity
             @Override
             public void onClick(View view)
             {
+                if (onboardingScreen != null)
+                {
+                    onboardingScreen.clear();
+                }
                 openOnboarding();
             }
         });
@@ -76,34 +80,22 @@ public class MainActivity
                 .withOverlayColor(R.color.black_trans)
                 .withTextColor(R.color.white)
                 .withBorderColor(R.color.white)
-                .withText("Above the center")
-                .above(centerView)
-                .withText("Below the center")
-                .below(centerView)
-                .withText("To left of the center\nTwo lines")
-                .left(centerView)
-                .withText("To right of the center")
-                .right(centerView)
-                .withText("Right of top left")
-                .right(topLeftView)
-                .withText("Below top left")
-                .below(topLeftView)
-                .withText("Left of top right")
-                .left(topRightView)
-                .withText("Below top right")
-                .below(topRightView)
-                .withText("Above bottom left")
-                .above(bottomLeftView)
-                .withText("Right bottom left")
-                .right(bottomLeftView)
-                .withText("Above bottom right")
-                .above(bottomRightView)
-                .withText("Left bottom right")
-                .left(bottomRightView)
-                .withBorder(true)
-                .around(topLeftView)
-                .withBorder(false)
-                .around(topRightView)
+                .withText("Above the center").above(centerView)
+                .withText("Below the center").below(centerView)
+                .withText("To left of the center\nTwo lines").left(centerView)
+                .withText("To right of the center").right(centerView)
+                .withText("Right of top left").right(topLeftView)
+                .withText("Below top left").below(topLeftView)
+                .withText("Left of top right").left(topRightView)
+                .withText("Below top right").below(topRightView)
+                .withText("Above bottom left").above(bottomLeftView)
+                .withText("Right bottom left").right(bottomLeftView)
+                .withText("Above bottom right").above(bottomRightView)
+                .withText("Left bottom right").left(bottomRightView)
+                .withBorder(true).around(topLeftView)
+                .withBorder(false).around(topRightView)
+                .withHole(true).around(bottomLeftView)
+                .withHole(false).around(bottomRightView)
                 .show();
     }
 

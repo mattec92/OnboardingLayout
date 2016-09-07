@@ -56,6 +56,13 @@ public class Onboard
             return borderOnboardingElement;
         }
 
+        public HoleOnboardingElement withHole(boolean circular)
+        {
+            HoleOnboardingElement holeOnboardingElement = new HoleOnboardingElement(this, circular);
+            onboardingElements.add(holeOnboardingElement);
+            return holeOnboardingElement;
+        }
+
         public OnboardingScreen withOverlayColor(int backgroundColorResourceId)
         {
             this.backgroundColorResourceId = backgroundColorResourceId;
@@ -78,8 +85,18 @@ public class Onboard
         {
             if (backgroundColorResourceId != -1)
             {
-                View backgroundView = new View(context);
-                backgroundView.setBackgroundResource(backgroundColorResourceId);
+                List<BackgroundView.Hole> holes = new ArrayList<>();
+                for (OnboardingElement element : onboardingElements)
+                {
+                    if (element instanceof HoleOnboardingElement)
+                    {
+                        holes.add(((HoleOnboardingElement) element).hole);
+                    }
+                }
+
+                BackgroundView backgroundView = new BackgroundView(context);
+                backgroundView.setBackgroundColor(backgroundColorResourceId);
+                backgroundView.setHoles(holes);
                 backgroundView.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
                 onboardingLayout.addView(backgroundView);
                 this.backgroundView = backgroundView;
@@ -87,7 +104,11 @@ public class Onboard
 
             for (OnboardingElement element : onboardingElements)
             {
-                onboardingLayout.addView(element.create());
+                View view = element.create();
+                if (view != null)
+                {
+                    onboardingLayout.addView(view);
+                }
             }
 
             return this;
@@ -225,7 +246,6 @@ public class Onboard
             final int viewToAlignHeight = bottom - top;
 
             final int viewToAlignCenterHorizontal = left + viewToAlignWidth / 2;
-            int viewToAlignCenterVertical = top + viewToAlignHeight / 2;
 
             final OnboardingLayout.LayoutParams params = new OnboardingLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 
@@ -263,6 +283,7 @@ public class Onboard
 
             view.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener()
             {
+
                 @Override
                 public void onGlobalLayout()
                 {
@@ -403,6 +424,41 @@ public class Onboard
 
             view.setLayoutParams(params);
         }
+    }
+
+    public static class HoleOnboardingElement
+            extends OnboardingElement
+    {
+
+        public boolean isCircular;
+        public BackgroundView.Hole hole;
+
+        public HoleOnboardingElement(OnboardingScreen onboardingScreen, boolean isCircular)
+        {
+            super(onboardingScreen);
+            this.isCircular = isCircular;
+        }
+
+        public OnboardingScreen around(View view)
+        {
+            location = Location.AROUND;
+            getLocation(view);
+            hole = new BackgroundView.Hole(left, top, right, bottom, isCircular);
+            return onboardingScreen;
+        }
+
+        @Override
+        protected View buildView()
+        {
+            return null;
+        }
+
+        @Override
+        protected void positionView(View view)
+        {
+
+        }
+
     }
 
 }

@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<se.mattec.onboardinglayout.OnboardingLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<se.mattec.onboardinglayout.views.OnboardingLayout
     android:id="@+id/onboarding_layout"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity" >
 
     <Button
         android:id="@+id/onboarding_show_button"
@@ -79,4 +80,4 @@
         android:visibility="gone"
         tools:visibility="visible" />
 
-</se.mattec.onboardinglayout.OnboardingLayout>
+</se.mattec.onboardinglayout.views.OnboardingLayout >

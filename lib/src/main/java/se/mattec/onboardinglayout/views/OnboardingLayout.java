@@ -1,14 +1,16 @@
-package se.mattec.onboardinglayout;
+package se.mattec.onboardinglayout.views;
 
 import android.content.Context;
 import android.util.AttributeSet;
 import android.widget.FrameLayout;
 
+import se.mattec.onboardinglayout.OnboardingScreen;
+
 public class OnboardingLayout
         extends FrameLayout
 {
 
-    private Onboard.OnboardingScreen currentOnboardingScreen;
+    private OnboardingScreen currentOnboardingScreen;
 
     public OnboardingLayout(Context context)
     {
@@ -33,7 +35,7 @@ public class OnboardingLayout
 
     }
 
-    public void setOnboardingScreen(Onboard.OnboardingScreen onboardingScreen)
+    public void setOnboardingScreen(OnboardingScreen onboardingScreen)
     {
         currentOnboardingScreen = onboardingScreen;
     }

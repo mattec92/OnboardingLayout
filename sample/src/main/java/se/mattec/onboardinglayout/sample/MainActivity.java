@@ -6,7 +6,8 @@ import android.view.View;
 import android.widget.Button;
 
 import se.mattec.onboardinglayout.Onboard;
-import se.mattec.onboardinglayout.OnboardingLayout;
+import se.mattec.onboardinglayout.views.OnboardingLayout;
+import se.mattec.onboardinglayout.OnboardingScreen;
 
 public class MainActivity
         extends AppCompatActivity
@@ -21,7 +22,7 @@ public class MainActivity
     private View bottomLeftView;
     private View bottomRightView;
 
-    private Onboard.OnboardingScreen onboardingScreen;
+    private OnboardingScreen onboardingScreen;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)

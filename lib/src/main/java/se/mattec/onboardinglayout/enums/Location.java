@@ -1,4 +1,4 @@
-package se.mattec.onboardinglayout;
+package se.mattec.onboardinglayout.enums;
 
 public enum Location
 {

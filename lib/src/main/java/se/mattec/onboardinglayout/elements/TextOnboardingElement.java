@@ -57,6 +57,7 @@ public class TextOnboardingElement
     {
         TextView textView = new TextView(context);
         textView.setText(text);
+        textView.setVisibility(View.INVISIBLE);
 
         int padding = (int) context.getResources().getDimension(R.dimen.text_padding);
         textView.setPadding(padding, padding, padding, padding);
@@ -191,6 +192,17 @@ public class TextOnboardingElement
 
                 view.requestLayout();
                 view.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+
+                view.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener()
+                {
+
+                    @Override
+                    public void onGlobalLayout()
+                    {
+                        view.setVisibility(View.VISIBLE);
+                        view.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                    }
+                });
             }
         });
     }

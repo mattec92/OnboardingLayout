@@ -2,16 +2,16 @@ package se.mattec.onboardinglayout.elements;
 
 import android.view.View;
 
-import se.mattec.onboardinglayout.views.BackgroundView;
-import se.mattec.onboardinglayout.enums.Location;
 import se.mattec.onboardinglayout.OnboardingScreen;
+import se.mattec.onboardinglayout.enums.Location;
+import se.mattec.onboardinglayout.views.BackgroundView;
 
 public class HoleOnboardingElement
         extends OnboardingElement
 {
 
-    public boolean isCircular;
-    public BackgroundView.Hole hole;
+    private boolean isCircular;
+    private BackgroundView.HoleSpec holeSpec;
 
     public HoleOnboardingElement(OnboardingScreen onboardingScreen, boolean isCircular)
     {
@@ -23,7 +23,7 @@ public class HoleOnboardingElement
     {
         location = Location.AROUND;
         getLocation(view);
-        hole = new BackgroundView.Hole(left, top, right, bottom, isCircular);
+        holeSpec = new BackgroundView.HoleSpec(left, top, right, bottom, isCircular);
         return onboardingScreen;
     }
 
@@ -37,6 +37,11 @@ public class HoleOnboardingElement
     protected void positionView(View view)
     {
 
+    }
+
+    public BackgroundView.HoleSpec getHoleSpec()
+    {
+        return holeSpec;
     }
 
 }

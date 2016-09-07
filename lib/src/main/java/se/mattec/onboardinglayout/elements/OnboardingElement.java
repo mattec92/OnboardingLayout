@@ -3,8 +3,8 @@ package se.mattec.onboardinglayout.elements;
 import android.content.Context;
 import android.view.View;
 
-import se.mattec.onboardinglayout.enums.Location;
 import se.mattec.onboardinglayout.OnboardingScreen;
+import se.mattec.onboardinglayout.enums.Location;
 
 public abstract class OnboardingElement
 {
@@ -20,12 +20,12 @@ public abstract class OnboardingElement
     protected int left;
     protected int right;
 
-    public View view;
+    protected View view;
 
     public OnboardingElement(OnboardingScreen onboardingScreen)
     {
         this.onboardingScreen = onboardingScreen;
-        this.context = onboardingScreen.context;
+        this.context = onboardingScreen.getContext();
     }
 
     protected void getLocation(View view)
@@ -39,7 +39,7 @@ public abstract class OnboardingElement
             left += view.getLeft();
             right += view.getRight();
         }
-        while (view.getParent() != onboardingScreen.onboardingLayout);
+        while (view.getParent() != onboardingScreen.getOnboardingLayout());
     }
 
     public View create()
@@ -47,6 +47,16 @@ public abstract class OnboardingElement
         View view = buildView();
         positionView(view);
         return view;
+    }
+
+    public View getView()
+    {
+        return view;
+    }
+
+    public void clear()
+    {
+        view = null;
     }
 
     protected abstract View buildView();

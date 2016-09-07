@@ -23,7 +23,7 @@ public class BackgroundView
     private Paint transparentPaint;
 
     private int backgroundResourceId;
-    private List<Hole> holes;
+    private List<HoleSpec> holeSpecs;
 
     public BackgroundView(Context context)
     {
@@ -62,26 +62,26 @@ public class BackgroundView
         super.onDraw(canvas);
         tempCanvas.drawRect(0, 0, tempCanvas.getWidth(), tempCanvas.getHeight(), backgroundPaint);
 
-        if (holes != null)
+        if (holeSpecs != null)
         {
-            for (Hole hole : holes)
+            for (HoleSpec holeSpec : holeSpecs)
             {
-                if (hole.isCircular)
+                if (holeSpec.isCircular())
                 {
                     tempCanvas.drawOval(
-                            hole.left,
-                            hole.top,
-                            hole.right,
-                            hole.bottom,
+                            holeSpec.getLeft(),
+                            holeSpec.getTop(),
+                            holeSpec.getRight(),
+                            holeSpec.getBottom(),
                             transparentPaint);
                 }
                 else
                 {
                     tempCanvas.drawRect(
-                            hole.left,
-                            hole.top,
-                            hole.right,
-                            hole.bottom,
+                            holeSpec.getLeft(),
+                            holeSpec.getTop(),
+                            holeSpec.getRight(),
+                            holeSpec.getBottom(),
                             transparentPaint);
                 }
             }
@@ -96,12 +96,12 @@ public class BackgroundView
         backgroundPaint.setColor(ContextCompat.getColor(getContext(), backgroundResourceId));
     }
 
-    public void setHoles(List<Hole> holes)
+    public void setHoleSpecs(List<HoleSpec> holeSpecs)
     {
-        this.holes = holes;
+        this.holeSpecs = holeSpecs;
     }
 
-    public static class Hole
+    public static class HoleSpec
     {
 
         private int left;
@@ -110,13 +110,38 @@ public class BackgroundView
         private int bottom;
         private boolean isCircular;
 
-        public Hole(int left, int top, int right, int bottom, boolean isCircular)
+        public HoleSpec(int left, int top, int right, int bottom, boolean isCircular)
         {
             this.left = left;
             this.top = top;
             this.right = right;
             this.bottom = bottom;
             this.isCircular = isCircular;
+        }
+
+        public int getLeft()
+        {
+            return left;
+        }
+
+        public int getTop()
+        {
+            return top;
+        }
+
+        public int getRight()
+        {
+            return right;
+        }
+
+        public int getBottom()
+        {
+            return bottom;
+        }
+
+        public boolean isCircular()
+        {
+            return isCircular;
         }
 
     }

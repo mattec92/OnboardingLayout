@@ -8,9 +8,9 @@ import android.view.ViewTreeObserver;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
-import se.mattec.onboardinglayout.enums.Location;
 import se.mattec.onboardinglayout.OnboardingScreen;
 import se.mattec.onboardinglayout.R;
+import se.mattec.onboardinglayout.enums.Location;
 
 public class TextOnboardingElement
         extends OnboardingElement
@@ -61,9 +61,9 @@ public class TextOnboardingElement
         int padding = (int) context.getResources().getDimension(R.dimen.text_padding);
         textView.setPadding(padding, padding, padding, padding);
 
-        if (onboardingScreen.textColorResourceId != -1)
+        if (onboardingScreen.getTextColorResourceId() != -1)
         {
-            textView.setTextColor(ContextCompat.getColor(context, onboardingScreen.textColorResourceId));
+            textView.setTextColor(ContextCompat.getColor(context, onboardingScreen.getTextColorResourceId()));
         }
 
         view = textView;
@@ -74,7 +74,7 @@ public class TextOnboardingElement
     @Override
     protected void positionView(final View view)
     {
-        final int onboardingLayoutWidth = onboardingScreen.onboardingLayout.getWidth();
+        final int onboardingLayoutWidth = onboardingScreen.getOnboardingLayout().getWidth();
 
         int viewToAlignWidth = right - left;
         final int viewToAlignHeight = bottom - top;
@@ -87,7 +87,7 @@ public class TextOnboardingElement
         {
             case ABOVE:
             {
-                params.bottomMargin = onboardingScreen.onboardingLayout.getHeight() - top;
+                params.bottomMargin = onboardingScreen.getOnboardingLayout().getHeight() - top;
                 params.gravity = Gravity.BOTTOM;
                 break;
             }

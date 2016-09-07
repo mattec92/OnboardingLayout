@@ -56,7 +56,7 @@ public class BorderOnboardingElement
             }
         }
 
-        if (onboardingScreen.borderColorResourceId != -1)
+        if (onboardingScreen.getBorderColorResourceId() != -1)
         {
             //TODO preserve transparency
 //                borderView.getBackground().setColorFilter(ContextCompat.getColor(context, onboardingScreen.borderColorResourceId), PorterDuff.Mode.SRC_IN);
@@ -70,8 +70,8 @@ public class BorderOnboardingElement
     @Override
     protected void positionView(View view)
     {
-        final int onboardingLayoutWidth = onboardingScreen.onboardingLayout.getWidth();
-        final int onboardingLayoutHeight = onboardingScreen.onboardingLayout.getHeight();
+        final int onboardingLayoutWidth = onboardingScreen.getOnboardingLayout().getWidth();
+        final int onboardingLayoutHeight = onboardingScreen.getOnboardingLayout().getHeight();
 
         int viewToAlignWidth = right - left;
         final int viewToAlignHeight = bottom - top;

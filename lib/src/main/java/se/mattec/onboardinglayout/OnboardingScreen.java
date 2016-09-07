@@ -18,13 +18,13 @@ import se.mattec.onboardinglayout.views.OnboardingLayout;
 public class OnboardingScreen
 {
 
-    public OnboardingLayout onboardingLayout;
+    private OnboardingLayout onboardingLayout;
     private List<OnboardingElement> onboardingElements;
-    public Context context;
+    private Context context;
 
     private int backgroundColorResourceId = -1;
-    public int textColorResourceId = -1;
-    public int borderColorResourceId = -1;
+    private int textColorResourceId = -1;
+    private int borderColorResourceId = -1;
 
     private View backgroundView;
 
@@ -78,18 +78,18 @@ public class OnboardingScreen
     {
         if (backgroundColorResourceId != -1)
         {
-            List<BackgroundView.Hole> holes = new ArrayList<>();
+            List<BackgroundView.HoleSpec> holeSpecs = new ArrayList<>();
             for (OnboardingElement element : onboardingElements)
             {
                 if (element instanceof HoleOnboardingElement)
                 {
-                    holes.add(((HoleOnboardingElement) element).hole);
+                    holeSpecs.add(((HoleOnboardingElement) element).getHoleSpec());
                 }
             }
 
             BackgroundView backgroundView = new BackgroundView(context);
             backgroundView.setBackgroundColor(backgroundColorResourceId);
-            backgroundView.setHoles(holes);
+            backgroundView.setHoleSpecs(holeSpecs);
             backgroundView.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
             onboardingLayout.addView(backgroundView);
             this.backgroundView = backgroundView;
@@ -111,8 +111,8 @@ public class OnboardingScreen
     {
         for (OnboardingElement element : onboardingElements)
         {
-            onboardingLayout.removeView(element.view);
-            element.view = null;
+            onboardingLayout.removeView(element.getView());
+            element.clear();
         }
 
         onboardingElements.clear();
@@ -124,6 +124,26 @@ public class OnboardingScreen
         }
 
         onboardingLayout = null;
+    }
+
+    public Context getContext()
+    {
+        return context;
+    }
+
+    public OnboardingLayout getOnboardingLayout()
+    {
+        return onboardingLayout;
+    }
+
+    public int getTextColorResourceId()
+    {
+        return textColorResourceId;
+    }
+
+    public int getBorderColorResourceId()
+    {
+        return borderColorResourceId;
     }
 
 }

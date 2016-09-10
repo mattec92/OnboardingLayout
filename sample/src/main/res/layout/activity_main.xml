@@ -1,30 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <se.mattec.onboardinglayout.views.OnboardingLayout
-    android:id="@+id/onboarding_layout"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/onboarding_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity" >
-
-    <Button
-        android:id="@+id/onboarding_show_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_gravity="center_horizontal|top"
-        android:layout_marginTop="100dp"
-        android:text="@string/show_onboarding" />
-
-    <Button
-        android:id="@+id/onboarding_clear_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_gravity="center_horizontal|bottom"
-        android:layout_marginBottom="100dp"
-        android:text="@string/clear_onboarding" />
+    tools:context=".MainActivity">
 
     <View
         android:id="@+id/center_view"
@@ -32,7 +13,7 @@
         android:layout_height="50dp"
         android:layout_centerInParent="true"
         android:layout_gravity="center"
-        android:background="@color/grey" />
+        android:background="@color/grey"/>
 
     <View
         android:id="@+id/top_left_view"
@@ -41,7 +22,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_gravity="top|left"
-        android:background="@color/grey" />
+        android:background="@color/grey"/>
 
     <View
         android:id="@+id/top_right_view"
@@ -50,7 +31,7 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
         android:layout_gravity="top|right"
-        android:background="@color/grey" />
+        android:background="@color/grey"/>
 
     <View
         android:id="@+id/bottom_left_view"
@@ -59,7 +40,7 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_gravity="bottom|left"
-        android:background="@color/grey" />
+        android:background="@color/grey"/>
 
     <View
         android:id="@+id/bottom_right_view"
@@ -68,7 +49,7 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_gravity="bottom|right"
-        android:background="@color/grey" />
+        android:background="@color/grey"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -78,6 +59,6 @@
         android:text="This is a super long text. I mean it. Its really super long."
         android:textSize="18sp"
         android:visibility="gone"
-        tools:visibility="visible" />
+        tools:visibility="visible"/>
 
-</se.mattec.onboardinglayout.views.OnboardingLayout >
+</se.mattec.onboardinglayout.views.OnboardingLayout>

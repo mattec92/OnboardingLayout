@@ -2,8 +2,9 @@ package se.mattec.onboardinglayout.sample;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 
 import se.mattec.onboardinglayout.Onboard;
 import se.mattec.onboardinglayout.OnboardingScreen;
@@ -14,8 +15,6 @@ public class MainActivity
 {
 
     private OnboardingLayout onboardingLayout;
-    private Button onboardingShowButton;
-    private Button onboardingClearButton;
     private View centerView;
     private View topLeftView;
     private View topRightView;
@@ -30,14 +29,11 @@ public class MainActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initViews();
-        setupButton();
     }
 
     private void initViews()
     {
         onboardingLayout = (OnboardingLayout) findViewById(R.id.onboarding_layout);
-        onboardingShowButton = (Button) findViewById(R.id.onboarding_show_button);
-        onboardingClearButton = (Button) findViewById(R.id.onboarding_clear_button);
         centerView = findViewById(R.id.center_view);
         topLeftView = findViewById(R.id.top_left_view);
         topRightView = findViewById(R.id.top_right_view);
@@ -45,34 +41,34 @@ public class MainActivity
         bottomRightView = findViewById(R.id.bottom_right_view);
     }
 
-    private void setupButton()
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu)
     {
-        onboardingShowButton.setOnClickListener(new View.OnClickListener()
-        {
+        getMenuInflater().inflate(R.menu.menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
 
-            @Override
-            public void onClick(View view)
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+        switch (item.getItemId())
+        {
+            case R.id.toggle:
             {
-                if (onboardingScreen != null)
+                if (onboardingScreen == null)
                 {
-                    onboardingScreen.clear(true);
+                    item.setTitle(getString(R.string.clear_onboarding));
+                    openOnboarding();
                 }
-                openOnboarding();
-            }
-        });
-
-        onboardingClearButton.setOnClickListener(new View.OnClickListener()
-        {
-
-            @Override
-            public void onClick(View view)
-            {
-                if (onboardingScreen != null)
+                else
                 {
+                    item.setTitle(getString(R.string.show_onboarding));
                     onboardingScreen.clear(true);
+                    onboardingScreen = null;
                 }
             }
-        });
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private void openOnboarding()

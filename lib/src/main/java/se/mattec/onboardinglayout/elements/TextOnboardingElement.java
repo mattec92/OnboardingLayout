@@ -99,12 +99,12 @@ public class TextOnboardingElement
         {
             root = new TextView(context);
             textView = (TextView) root;
+
+            int padding = (int) context.getResources().getDimension(R.dimen.text_padding);
+            textView.setPadding(padding, padding, padding, padding);
         }
 
         textView.setText(text);
-
-        int padding = (int) context.getResources().getDimension(R.dimen.text_padding);
-        textView.setPadding(padding, padding, padding, padding);
 
         if (onboardingScreen.getTextColorResourceId() != -1)
         {

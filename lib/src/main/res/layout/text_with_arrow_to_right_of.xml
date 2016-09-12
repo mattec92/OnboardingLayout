@@ -9,10 +9,10 @@
         android:id="@+id/text_with_arrow_arrow"
         android:layout_width="48dp"
         android:layout_height="64dp"
-        android:layout_gravity="right|top"
-        android:layout_marginRight="10dp"
-        android:rotation="255"
-        android:scaleX="-1"
+        android:layout_gravity="bottom|right"
+        android:layout_marginRight="15dp"
+        android:rotation="-30"
+        android:scaleX="1"
         android:scaleY="-1"
         android:src="@drawable/arrow" />
 
@@ -20,10 +20,9 @@
         android:id="@+id/text_with_arrow_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="right|top"
-        android:layout_marginRight="45dp"
-        android:layout_marginTop="25dp"
-        android:gravity="right"
+        android:layout_gravity="bottom|right"
+        android:paddingBottom="50dp"
+        android:paddingRight="35dp"
         tools:text="Text below arrow\nTwo lines" />
 
 </FrameLayout >

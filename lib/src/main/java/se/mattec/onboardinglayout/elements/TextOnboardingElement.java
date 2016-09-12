@@ -122,6 +122,7 @@ public class TextOnboardingElement
     protected void positionView(final View view)
     {
         final int onboardingLayoutWidth = onboardingScreen.getOnboardingLayout().getWidth();
+        final int onboardingLayoutHeight = onboardingScreen.getOnboardingLayout().getHeight();
 
         int viewToAlignWidth = right - left;
         final int viewToAlignHeight = bottom - top;
@@ -147,14 +148,14 @@ public class TextOnboardingElement
             case LEFT:
             {
                 params.rightMargin = onboardingLayoutWidth - left;
-                params.topMargin = top;
+//                params.topMargin = top;
                 params.gravity = Gravity.RIGHT;
                 break;
             }
             case RIGHT:
             {
                 params.leftMargin = right;
-                params.topMargin = top;
+//                params.topMargin = top;
                 params.gravity = Gravity.LEFT;
                 break;
             }
@@ -171,9 +172,9 @@ public class TextOnboardingElement
                 int height = view.getHeight();
                 int width = view.getWidth();
 
+                //TODO: Repetetive switch cases
                 switch (location)
                 {
-
                     case ABOVE:
                     {
                         //If there is enough place to center the view
@@ -216,7 +217,16 @@ public class TextOnboardingElement
                         //Otherwise center it outside the view.
                         else
                         {
-                            params.topMargin = top - (height - viewToAlignHeight) / 2;
+                            int topMarginCenteredOutside = top - (height - viewToAlignHeight) / 2;
+                            int bottomMostPosition = onboardingLayoutHeight - height;
+                            if (topMarginCenteredOutside < bottomMostPosition)
+                            {
+                                params.topMargin = Math.max(0, topMarginCenteredOutside);
+                            }
+                            else
+                            {
+                                params.topMargin = bottomMostPosition;
+                            }
                         }
                         break;
                     }
@@ -230,7 +240,16 @@ public class TextOnboardingElement
                         //Otherwise center it outside the view.
                         else
                         {
-                            params.topMargin = top - (height - viewToAlignHeight) / 2;
+                            int topMarginCenteredOutside = top - (height - viewToAlignHeight) / 2;
+                            int bottomMostPosition = onboardingLayoutHeight - height;
+                            if (topMarginCenteredOutside < bottomMostPosition)
+                            {
+                                params.topMargin = Math.max(0, topMarginCenteredOutside);
+                            }
+                            else
+                            {
+                                params.topMargin = bottomMostPosition;
+                            }
                         }
                         break;
                     }

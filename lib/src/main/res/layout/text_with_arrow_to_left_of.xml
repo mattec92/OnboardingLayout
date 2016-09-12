@@ -10,8 +10,8 @@
         android:layout_width="48dp"
         android:layout_height="64dp"
         android:layout_gravity="bottom|left"
-        android:layout_marginLeft="10dp"
-        android:rotation="77"
+        android:layout_marginLeft="15dp"
+        android:rotation="30"
         android:scaleX="-1"
         android:scaleY="-1"
         android:src="@drawable/arrow" />
@@ -21,8 +21,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|left"
-        android:paddingBottom="25dp"
-        android:paddingLeft="45dp"
+        android:paddingBottom="50dp"
+        android:paddingLeft="35dp"
         tools:text="Text below arrow" />
 
 </FrameLayout >

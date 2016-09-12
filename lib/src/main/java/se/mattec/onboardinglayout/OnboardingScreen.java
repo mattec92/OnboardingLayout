@@ -39,7 +39,13 @@ public class OnboardingScreen
 
     public TextOnboardingElement withText(String text)
     {
-        TextOnboardingElement textOnboardingElement = new TextOnboardingElement(this, text);
+        TextOnboardingElement textOnboardingElement = new TextOnboardingElement(this, text, false);
+        onboardingElements.add(textOnboardingElement);
+        return textOnboardingElement;
+    }
+
+    public TextOnboardingElement withTextAndArrow(String text) {
+        TextOnboardingElement textOnboardingElement = new TextOnboardingElement(this, text, true);
         onboardingElements.add(textOnboardingElement);
         return textOnboardingElement;
     }

@@ -1,11 +1,14 @@
 package se.mattec.onboardinglayout.elements;
 
+import android.content.Context;
 import android.support.v4.content.ContextCompat;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import se.mattec.onboardinglayout.OnboardingScreen;
@@ -17,11 +20,13 @@ public class TextOnboardingElement
 {
 
     private String text;
+    private boolean showArrow;
 
-    public TextOnboardingElement(OnboardingScreen onboardingScreen, String text)
+    public TextOnboardingElement(OnboardingScreen onboardingScreen, String text, boolean showArrow)
     {
         super(onboardingScreen);
         this.text = text;
+        this.showArrow = showArrow;
     }
 
     public OnboardingScreen above(View view)
@@ -55,9 +60,48 @@ public class TextOnboardingElement
     @Override
     protected View buildView()
     {
-        TextView textView = new TextView(context);
+        View root = null;
+        TextView textView = null;
+
+        if (showArrow)
+        {
+            LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+            switch (location)
+            {
+                case ABOVE:
+                {
+                    root = inflater.inflate(R.layout.text_with_arrow_below, null, false);
+                    break;
+                }
+                case BELOW:
+                {
+                    root = inflater.inflate(R.layout.text_with_arrow_above, null, false);
+                    break;
+                }
+                case LEFT:
+                {
+                    root = inflater.inflate(R.layout.text_with_arrow_to_right_of, null, false);
+                    break;
+                }
+                case RIGHT:
+                {
+                    root = inflater.inflate(R.layout.text_with_arrow_to_left_of, null, false);
+                    break;
+                }
+            }
+
+            textView = (TextView) root.findViewById(R.id.text_with_arrow_text);
+
+            ImageView arrow = (ImageView) root.findViewById(R.id.text_with_arrow_arrow);
+        }
+        else
+        {
+            root = new TextView(context);
+            textView = (TextView) root;
+        }
+
         textView.setText(text);
-        textView.setVisibility(View.INVISIBLE);
 
         int padding = (int) context.getResources().getDimension(R.dimen.text_padding);
         textView.setPadding(padding, padding, padding, padding);
@@ -67,9 +111,11 @@ public class TextOnboardingElement
             textView.setTextColor(ContextCompat.getColor(context, onboardingScreen.getTextColorResourceId()));
         }
 
-        view = textView;
+        root.setVisibility(View.INVISIBLE);
 
-        return textView;
+        view = root;
+
+        return root;
     }
 
     @Override

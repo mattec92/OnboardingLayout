@@ -71,22 +71,22 @@ public class TextOnboardingElement
             {
                 case ABOVE:
                 {
-                    root = inflater.inflate(R.layout.text_with_arrow_below, null, false);
+                    root = inflater.inflate(R.layout.text_with_arrow_below_right, null, false);
                     break;
                 }
                 case BELOW:
                 {
-                    root = inflater.inflate(R.layout.text_with_arrow_above, null, false);
+                    root = inflater.inflate(R.layout.text_with_arrow_above_left, null, false);
                     break;
                 }
                 case LEFT:
                 {
-                    root = inflater.inflate(R.layout.text_with_arrow_to_right_of, null, false);
+                    root = inflater.inflate(R.layout.text_with_arrow_bottom_right, null, false);
                     break;
                 }
                 case RIGHT:
                 {
-                    root = inflater.inflate(R.layout.text_with_arrow_to_left_of, null, false);
+                    root = inflater.inflate(R.layout.text_with_arrow_bottom_left, null, false);
                     break;
                 }
             }

@@ -1,5 +1,7 @@
 package se.mattec.onboardinglayout.elements;
 
+import android.graphics.PorterDuff;
+import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.widget.FrameLayout;
 
@@ -58,8 +60,7 @@ public class BorderOnboardingElement
 
         if (onboardingScreen.getBorderColorResourceId() != -1)
         {
-            //TODO preserve transparency
-//                borderView.getBackground().setColorFilter(ContextCompat.getColor(context, onboardingScreen.borderColorResourceId), PorterDuff.Mode.SRC_IN);
+            borderView.getBackground().setColorFilter(ContextCompat.getColor(context, onboardingScreen.getBorderColorResourceId()), PorterDuff.Mode.SRC_IN);
         }
 
         view = borderView;

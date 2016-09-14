@@ -14,6 +14,8 @@ import se.mattec.onboardinglayout.elements.BorderOnboardingElement;
 import se.mattec.onboardinglayout.elements.HoleOnboardingElement;
 import se.mattec.onboardinglayout.elements.OnboardingElement;
 import se.mattec.onboardinglayout.elements.TextOnboardingElement;
+import se.mattec.onboardinglayout.elements.TextWithArrowOnboardingElement;
+import se.mattec.onboardinglayout.enums.ArrowLocation;
 import se.mattec.onboardinglayout.views.BackgroundView;
 import se.mattec.onboardinglayout.views.OnboardingLayout;
 
@@ -39,13 +41,14 @@ public class OnboardingScreen
 
     public TextOnboardingElement withText(String text)
     {
-        TextOnboardingElement textOnboardingElement = new TextOnboardingElement(this, text, false);
+        TextOnboardingElement textOnboardingElement = new TextOnboardingElement(this, text);
         onboardingElements.add(textOnboardingElement);
         return textOnboardingElement;
     }
 
-    public TextOnboardingElement withTextAndArrow(String text) {
-        TextOnboardingElement textOnboardingElement = new TextOnboardingElement(this, text, true);
+    public TextOnboardingElement withTextAndArrow(String text, ArrowLocation arrowLocation)
+    {
+        TextWithArrowOnboardingElement textOnboardingElement = new TextWithArrowOnboardingElement(this, text, arrowLocation);
         onboardingElements.add(textOnboardingElement);
         return textOnboardingElement;
     }

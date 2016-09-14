@@ -8,6 +8,7 @@ import android.view.View;
 
 import se.mattec.onboardinglayout.Onboard;
 import se.mattec.onboardinglayout.OnboardingScreen;
+import se.mattec.onboardinglayout.enums.ArrowLocation;
 import se.mattec.onboardinglayout.views.OnboardingLayout;
 
 public class MainActivity
@@ -89,18 +90,18 @@ public class MainActivity
 //                .withText("Right bottom left").toRightOf(bottomLeftView)
 //                .withText("Above bottom right").above(bottomRightView)
 //                .withText("Left bottom right").toLeftOf(bottomRightView)
-                .withTextAndArrow("Above the center").above(centerView)
-                .withTextAndArrow("Below the center").below(centerView)
-                .withTextAndArrow("To left of the center\nTwo lines").toLeftOf(centerView)
-                .withTextAndArrow("To right of the center").toRightOf(centerView)
-                .withTextAndArrow("Right of top left").toRightOf(topLeftView)
-                .withTextAndArrow("Below top left").below(topLeftView)
-                .withTextAndArrow("Left of top right").toLeftOf(topRightView)
-                .withTextAndArrow("Below top right").below(topRightView)
-                .withTextAndArrow("Above bottom left").above(bottomLeftView)
-                .withTextAndArrow("Right bottom left").toRightOf(bottomLeftView)
-                .withTextAndArrow("Above bottom right").above(bottomRightView)
-                .withTextAndArrow("Left bottom right").toLeftOf(bottomRightView)
+                .withTextAndArrow("Above the center", ArrowLocation.MIDDLE).above(centerView)
+                .withTextAndArrow("Below the center", ArrowLocation.MIDDLE).below(centerView)
+                .withTextAndArrow("To left of the center\nTwo lines", ArrowLocation.ABOVE).toLeftOf(centerView)
+                .withTextAndArrow("To right of the center", ArrowLocation.BELOW).toRightOf(centerView)
+                .withTextAndArrow("Right of top left", ArrowLocation.ABOVE).toRightOf(topLeftView)
+                .withTextAndArrow("Below top left", ArrowLocation.LEFT).below(topLeftView)
+                .withTextAndArrow("Left of top right", ArrowLocation.ABOVE).toLeftOf(topRightView)
+                .withTextAndArrow("Below top right", ArrowLocation.RIGHT).below(topRightView)
+                .withTextAndArrow("Above bottom left", ArrowLocation.LEFT).above(bottomLeftView)
+                .withTextAndArrow("Right bottom left", ArrowLocation.BELOW).toRightOf(bottomLeftView)
+                .withTextAndArrow("Above bottom right", ArrowLocation.RIGHT).above(bottomRightView)
+                .withTextAndArrow("Left bottom right", ArrowLocation.BELOW).toLeftOf(bottomRightView)
                 .withBorder(true, true).around(topLeftView)
                 .withBorder(false, false).around(topRightView)
                 .withBorder(true, false).around(bottomRightView)

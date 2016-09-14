@@ -1,14 +1,11 @@
 package se.mattec.onboardinglayout.elements;
 
-import android.content.Context;
 import android.support.v4.content.ContextCompat;
 import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.FrameLayout;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import se.mattec.onboardinglayout.OnboardingScreen;
@@ -19,14 +16,12 @@ public class TextOnboardingElement
         extends OnboardingElement
 {
 
-    private String text;
-    private boolean showArrow;
+    protected String text;
 
-    public TextOnboardingElement(OnboardingScreen onboardingScreen, String text, boolean showArrow)
+    public TextOnboardingElement(OnboardingScreen onboardingScreen, String text)
     {
         super(onboardingScreen);
         this.text = text;
-        this.showArrow = showArrow;
     }
 
     public OnboardingScreen above(View view)
@@ -60,49 +55,10 @@ public class TextOnboardingElement
     @Override
     protected View buildView()
     {
-        View root = null;
-        TextView textView = null;
+        TextView textView = new TextView(context);
 
-        if (showArrow)
-        {
-            LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
-            switch (location)
-            {
-                case ABOVE:
-                {
-                    root = inflater.inflate(R.layout.text_with_arrow_below_right, null, false);
-                    break;
-                }
-                case BELOW:
-                {
-                    root = inflater.inflate(R.layout.text_with_arrow_above_left, null, false);
-                    break;
-                }
-                case LEFT:
-                {
-                    root = inflater.inflate(R.layout.text_with_arrow_bottom_right, null, false);
-                    break;
-                }
-                case RIGHT:
-                {
-                    root = inflater.inflate(R.layout.text_with_arrow_bottom_left, null, false);
-                    break;
-                }
-            }
-
-            textView = (TextView) root.findViewById(R.id.text_with_arrow_text);
-
-            ImageView arrow = (ImageView) root.findViewById(R.id.text_with_arrow_arrow);
-        }
-        else
-        {
-            root = new TextView(context);
-            textView = (TextView) root;
-
-            int padding = (int) context.getResources().getDimension(R.dimen.text_padding);
-            textView.setPadding(padding, padding, padding, padding);
-        }
+        int padding = (int) context.getResources().getDimension(R.dimen.text_padding);
+        textView.setPadding(padding, padding, padding, padding);
 
         textView.setText(text);
 
@@ -111,11 +67,11 @@ public class TextOnboardingElement
             textView.setTextColor(ContextCompat.getColor(context, onboardingScreen.getTextColorResourceId()));
         }
 
-        root.setVisibility(View.INVISIBLE);
+        textView.setVisibility(View.INVISIBLE);
 
-        view = root;
+        view = textView;
 
-        return root;
+        return textView;
     }
 
     @Override

@@ -22,7 +22,9 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|right"
         android:paddingBottom="50dp"
+        android:paddingLeft="5dp"
         android:paddingRight="35dp"
+        android:paddingTop="5dp"
         tools:text="Text below arrow\nTwo lines" />
 
 </FrameLayout >

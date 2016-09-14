@@ -127,6 +127,11 @@ public class OnboardingScreen
         return this;
     }
 
+    public OnboardingScreen show()
+    {
+        return show(false);
+    }
+
     public void clear(boolean animate)
     {
         for (final OnboardingElement element : onboardingElements)
@@ -176,6 +181,11 @@ public class OnboardingScreen
                 backgroundView = null;
             }
         }
+    }
+
+    public void clear()
+    {
+        clear(false);
     }
 
     public Context getContext()

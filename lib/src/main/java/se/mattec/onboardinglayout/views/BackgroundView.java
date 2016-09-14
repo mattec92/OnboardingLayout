@@ -22,7 +22,8 @@ public class BackgroundView
     private Paint paint;
     private Paint transparentPaint;
 
-    private int backgroundResourceId;
+    private boolean didDraw;
+
     private List<HoleSpec> holeSpecs;
 
     public BackgroundView(Context context)
@@ -52,7 +53,7 @@ public class BackgroundView
         paint = new Paint();
         backgroundPaint = new Paint();
         transparentPaint = new Paint();
-        transparentPaint.setColor(getResources().getColor(android.R.color.transparent));
+        transparentPaint.setColor(ContextCompat.getColor(getContext(), android.R.color.transparent));
         transparentPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.CLEAR));
     }
 
@@ -60,31 +61,36 @@ public class BackgroundView
     protected void onDraw(Canvas canvas)
     {
         super.onDraw(canvas);
-        tempCanvas.drawRect(0, 0, tempCanvas.getWidth(), tempCanvas.getHeight(), backgroundPaint);
 
-        if (holeSpecs != null)
+        if (!didDraw)
         {
-            for (HoleSpec holeSpec : holeSpecs)
+            tempCanvas.drawRect(0, 0, tempCanvas.getWidth(), tempCanvas.getHeight(), backgroundPaint);
+
+            if (holeSpecs != null)
             {
-                if (holeSpec.isCircular())
+                for (HoleSpec holeSpec : holeSpecs)
                 {
-                    tempCanvas.drawOval(
-                            holeSpec.getLeft(),
-                            holeSpec.getTop(),
-                            holeSpec.getRight(),
-                            holeSpec.getBottom(),
-                            transparentPaint);
-                }
-                else
-                {
-                    tempCanvas.drawRect(
-                            holeSpec.getLeft(),
-                            holeSpec.getTop(),
-                            holeSpec.getRight(),
-                            holeSpec.getBottom(),
-                            transparentPaint);
+                    if (holeSpec.isCircular())
+                    {
+                        tempCanvas.drawOval(
+                                holeSpec.getLeft(),
+                                holeSpec.getTop(),
+                                holeSpec.getRight(),
+                                holeSpec.getBottom(),
+                                transparentPaint);
+                    }
+                    else
+                    {
+                        tempCanvas.drawRect(
+                                holeSpec.getLeft(),
+                                holeSpec.getTop(),
+                                holeSpec.getRight(),
+                                holeSpec.getBottom(),
+                                transparentPaint);
+                    }
                 }
             }
+            didDraw = true;
         }
 
         canvas.drawBitmap(bitmap, 0, 0, paint);
@@ -92,7 +98,6 @@ public class BackgroundView
 
     public void setBackgroundColor(int backgroundResourceId)
     {
-        this.backgroundResourceId = backgroundResourceId;
         backgroundPaint.setColor(ContextCompat.getColor(getContext(), backgroundResourceId));
     }
 

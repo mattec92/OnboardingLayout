@@ -2,5 +2,8 @@
 <resources>
 
     <dimen name="text_padding">5dp</dimen>
+    <dimen name="arrow_top_bottom_margin">20dp</dimen>
+    <dimen name="arrow_left_right_margin">30dp</dimen>
+    <dimen name="arrow_middle_margin">7dp</dimen>
 
 </resources>

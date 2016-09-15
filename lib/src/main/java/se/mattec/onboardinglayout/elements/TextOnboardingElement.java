@@ -1,9 +1,8 @@
 package se.mattec.onboardinglayout.elements;
 
 import android.support.v4.content.ContextCompat;
-import android.view.Gravity;
+import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.FrameLayout;
 import android.widget.TextView;
@@ -75,7 +74,13 @@ public class TextOnboardingElement
     }
 
     @Override
-    protected void positionView(final View view)
+    protected void positionView(final View viewToPosition)
+    {
+        positionAside(viewToPosition);
+        alignViewToAlignCenter(viewToPosition);
+    }
+
+    private void alignViewToAlignCenter(final View viewToPosition)
     {
         final int onboardingLayoutWidth = onboardingScreen.getOnboardingLayout().getWidth();
         final int onboardingLayoutHeight = onboardingScreen.getOnboardingLayout().getHeight();
@@ -85,46 +90,16 @@ public class TextOnboardingElement
 
         final int viewToAlignCenterHorizontal = left + viewToAlignWidth / 2;
 
-        final FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        final FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) viewToPosition.getLayoutParams();
 
-        switch (location)
-        {
-            case ABOVE:
-            {
-                params.bottomMargin = onboardingScreen.getOnboardingLayout().getHeight() - top;
-                params.gravity = Gravity.BOTTOM;
-                break;
-            }
-            case BELOW:
-            {
-                params.topMargin = bottom;
-                params.gravity = Gravity.TOP;
-                break;
-            }
-            case LEFT:
-            {
-                params.rightMargin = onboardingLayoutWidth - left;
-                params.gravity = Gravity.RIGHT;
-                break;
-            }
-            case RIGHT:
-            {
-                params.leftMargin = right;
-                params.gravity = Gravity.LEFT;
-                break;
-            }
-        }
-
-        view.setLayoutParams(params);
-
-        view.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener()
+        viewToPosition.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener()
         {
 
             @Override
             public void onGlobalLayout()
             {
-                int height = view.getHeight();
-                int width = view.getWidth();
+                int height = viewToPosition.getHeight();
+                int width = viewToPosition.getWidth();
 
                 switch (location)
                 {
@@ -171,17 +146,17 @@ public class TextOnboardingElement
                     }
                 }
 
-                view.requestLayout();
-                view.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                viewToPosition.requestLayout();
+                viewToPosition.getViewTreeObserver().removeOnGlobalLayoutListener(this);
 
-                view.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener()
+                viewToPosition.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener()
                 {
 
                     @Override
                     public void onGlobalLayout()
                     {
-                        view.setVisibility(View.VISIBLE);
-                        view.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                        viewToPosition.setVisibility(View.VISIBLE);
+                        viewToPosition.getViewTreeObserver().removeOnGlobalLayoutListener(this);
                     }
                 });
             }

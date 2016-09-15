@@ -148,10 +148,10 @@ public class MainActivity
         onboardingScreen = Onboard.in(onboardingLayout)
                 .withOverlayColor(R.color.black_trans)
                 .withBorderColor(R.color.white)
-                .withBorder(true, true).around(topLeftView)
-                .withBorder(false, false).around(topRightView)
-                .withBorder(true, false).around(bottomRightView)
-                .withBorder(false, true).around(bottomLeftView)
+                .withBorder(true).around(topLeftView)
+                .withBorder(false).around(topRightView)
+                .withDashedBorder(false).around(bottomRightView)
+                .withDashedBorder(true).around(bottomLeftView)
                 .show(true);
     }
 

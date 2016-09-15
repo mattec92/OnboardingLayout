@@ -53,9 +53,16 @@ public class OnboardingScreen
         return textOnboardingElement;
     }
 
-    public BorderOnboardingElement withBorder(boolean isDashed, boolean isCircular)
+    public BorderOnboardingElement withBorder(boolean isCircular)
     {
-        BorderOnboardingElement borderOnboardingElement = new BorderOnboardingElement(this, isDashed, isCircular);
+        BorderOnboardingElement borderOnboardingElement = new BorderOnboardingElement(this, false, isCircular);
+        onboardingElements.add(borderOnboardingElement);
+        return borderOnboardingElement;
+    }
+
+    public BorderOnboardingElement withDashedBorder( boolean isCircular)
+    {
+        BorderOnboardingElement borderOnboardingElement = new BorderOnboardingElement(this, true, isCircular);
         onboardingElements.add(borderOnboardingElement);
         return borderOnboardingElement;
     }

@@ -30,6 +30,7 @@ public class MainActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initViews();
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
     }
 
     private void initViews()
@@ -54,42 +55,79 @@ public class MainActivity
     {
         switch (item.getItemId())
         {
-            case R.id.toggle:
+            case R.id.text:
             {
-                if (onboardingScreen == null)
+                if (onboardingScreen != null)
                 {
-                    item.setTitle(getString(R.string.clear_onboarding));
-                    openOnboarding();
-                }
-                else
-                {
-                    item.setTitle(getString(R.string.show_onboarding));
                     onboardingScreen.clear(true);
-                    onboardingScreen = null;
                 }
+                openTextOnboarding();
+                break;
+            }
+            case R.id.arrow:
+            {
+                if (onboardingScreen != null)
+                {
+                    onboardingScreen.clear(true);
+                }
+                openArrowOnboarding();
+                break;
+            }
+            case R.id.border:
+            {
+                if (onboardingScreen != null)
+                {
+                    onboardingScreen.clear(true);
+                }
+                openBorderOnboarding();
+                break;
+            }
+            case R.id.hole:
+            {
+                if (onboardingScreen != null)
+                {
+                    onboardingScreen.clear(true);
+                }
+                openHoleOnboarding();
+                break;
+            }
+            case R.id.clear:
+            {
+                if (onboardingScreen != null)
+                {
+                    onboardingScreen.clear(true);
+                }
+                break;
             }
         }
         return super.onOptionsItemSelected(item);
     }
 
-    private void openOnboarding()
+    private void openTextOnboarding()
     {
         onboardingScreen = Onboard.in(onboardingLayout)
                 .withOverlayColor(R.color.black_trans)
                 .withTextColor(R.color.white)
-                .withBorderColor(R.color.red)
-//                .withText("Above the center").above(centerView)
-//                .withText("Below the center").below(centerView)
-//                .withText("To left of the center\nTwo lines").toLeftOf(centerView)
-//                .withText("To right of the center").toRightOf(centerView)
-//                .withText("Right of top left").toRightOf(topLeftView)
-//                .withText("Below top left").below(topLeftView)
-//                .withText("Left of top right").toLeftOf(topRightView)
-//                .withText("Below top right").below(topRightView)
-//                .withText("Above bottom left").above(bottomLeftView)
-//                .withText("Right bottom left").toRightOf(bottomLeftView)
-//                .withText("Above bottom right").above(bottomRightView)
-//                .withText("Left bottom right").toLeftOf(bottomRightView)
+                .withText("Above the center").above(centerView)
+                .withText("Below the center").below(centerView)
+                .withText("To left of the center\nTwo lines").toLeftOf(centerView)
+                .withText("To right of the center").toRightOf(centerView)
+                .withText("Right of top left").toRightOf(topLeftView)
+                .withText("Below top left").below(topLeftView)
+                .withText("Left of top right").toLeftOf(topRightView)
+                .withText("Below top right").below(topRightView)
+                .withText("Above bottom left").above(bottomLeftView)
+                .withText("Right bottom left").toRightOf(bottomLeftView)
+                .withText("Above bottom right").above(bottomRightView)
+                .withText("Left bottom right").toLeftOf(bottomRightView)
+                .show(true);
+    }
+
+    private void openArrowOnboarding()
+    {
+        onboardingScreen = Onboard.in(onboardingLayout)
+                .withOverlayColor(R.color.black_trans)
+                .withTextColor(R.color.white)
                 .withTextAndArrow("Above the center", ArrowLocation.RIGHT).above(centerView)
                 .withTextAndArrow("Below the center", ArrowLocation.LEFT).below(centerView)
                 .withTextAndArrow("To left of the center\nTwo lines", ArrowLocation.ABOVE).toLeftOf(centerView)
@@ -102,10 +140,27 @@ public class MainActivity
                 .withTextAndArrow("Right bottom left", ArrowLocation.BELOW).toRightOf(bottomLeftView)
                 .withTextAndArrow("Above bottom right", ArrowLocation.RIGHT).above(bottomRightView)
                 .withTextAndArrow("Left bottom right", ArrowLocation.BELOW).toLeftOf(bottomRightView)
+                .show(true);
+    }
+
+    private void openBorderOnboarding()
+    {
+        onboardingScreen = Onboard.in(onboardingLayout)
+                .withOverlayColor(R.color.black_trans)
+                .withBorderColor(R.color.white)
                 .withBorder(true, true).around(topLeftView)
                 .withBorder(false, false).around(topRightView)
                 .withBorder(true, false).around(bottomRightView)
                 .withBorder(false, true).around(bottomLeftView)
+                .show(true);
+    }
+
+    private void openHoleOnboarding()
+    {
+        onboardingScreen = Onboard.in(onboardingLayout)
+                .withOverlayColor(R.color.black_trans)
+                .withHole(true).around(topLeftView)
+                .withHole(false).around(topRightView)
                 .withHole(true).around(bottomLeftView)
                 .withHole(false).around(bottomRightView)
                 .show(true);

@@ -2,13 +2,13 @@
 
 An Android library for creating custom onboarding overlays.
 
-`Beware! This project is in an early development stage.`
+`Beware! This project is in an early development stage. Any public methods and behaviors are subject to change.`
 
 ## Usage
 
 ### Installing
 
-TBD
+TBA
 
 ### XML
 
@@ -46,21 +46,55 @@ Overlay background color, text color and border color are specified globally.
 
 #### Onboarding elements
 
-The following onboarding element types are available:
-* Text
-* Text with arrow
-* Border
-* Hole
+The following onboarding element types are available.
 
-#### Placements
+##### Text
 
-Each onboarding element type specify their own placements.
+`withText(String text)`
 
-Typically a subset of the following placements are available.
+###### Allowed placements
+
 * above
 * below
 * toLeftOf
 * toRightOf
+
+##### Text with arrow
+
+`withTextAndArrow(String text, ArrowLocation arrowLocation)`
+
+###### Allowed placements
+
+* above
+* below
+* toLeftOf
+* toRightOf
+
+###### Allowed arrow locations
+
+Depending on the placement, different arrow locations are available. Illegal combinations will cause an exception.
+
+* above, below (placements)
+    * left, right, middle (arrow locations)
+* left, right
+    * above, below
+
+##### Border
+
+`withBorder(boolean isCircular)`
+
+`withDashedBorder(boolean isCircular)`
+
+###### Allowed placements
+
+* around
+
+##### Hole
+
+`withHole(boolean isCircular)`
+
+###### Allowed placements
+
 * around
 
 ## Sample application

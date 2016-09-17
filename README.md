@@ -117,7 +117,7 @@ Depending on the placement, different arrow locations are available. Illegal com
 
 ## Sample application
 
-A sample application is provided  in `/sample`.
+A sample application is provided  in [/sample](/sample).
 
 APK to be provided.
 

@@ -97,6 +97,18 @@ Depending on the placement, different arrow locations are available. Illegal com
 
 * around
 
+##### Image
+
+`withImage(int imageResourceId)`
+
+###### Allowed placements
+
+* above
+* below
+* toLeftOf
+* toRightOf
+* atop
+
 ## Sample application
 
 A sample application is provided  in `/sample`.

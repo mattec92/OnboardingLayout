@@ -23,8 +23,13 @@
         app:showAsAction="always"/>
 
     <item
+        android:id="@+id/image"
+        android:title="@string/image_onboarding"
+        app:showAsAction="ifRoom"/>
+
+    <item
         android:id="@+id/clear"
         android:title="@string/clear_onboarding"
-        app:showAsAction="always"/>
+        app:showAsAction="ifRoom"/>
 
 </menu>

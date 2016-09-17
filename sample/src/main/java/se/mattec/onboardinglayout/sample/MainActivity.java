@@ -91,6 +91,15 @@ public class MainActivity
                 openHoleOnboarding();
                 break;
             }
+            case R.id.image:
+            {
+                if (onboardingScreen != null)
+                {
+                    onboardingScreen.clear(true);
+                }
+                openImageOnboarding();
+                break;
+            }
             case R.id.clear:
             {
                 if (onboardingScreen != null)
@@ -163,6 +172,30 @@ public class MainActivity
                 .withHole(false).around(topRightView)
                 .withHole(true).around(bottomLeftView)
                 .withHole(false).around(bottomRightView)
+                .show(true);
+    }
+
+    private void openImageOnboarding()
+    {
+        onboardingScreen = Onboard.in(onboardingLayout)
+                .withOverlayColor(R.color.black_trans)
+                .withImage(R.mipmap.ic_launcher).atop(centerView)
+                .withImage(R.mipmap.ic_launcher).above(centerView)
+                .withImage(R.mipmap.ic_launcher).below(centerView)
+                .withImage(R.mipmap.ic_launcher).toLeftOf(centerView)
+                .withImage(R.mipmap.ic_launcher).toRightOf(centerView)
+                .withImage(R.mipmap.ic_launcher).atop(topLeftView)
+                .withImage(R.mipmap.ic_launcher).toRightOf(topLeftView)
+                .withImage(R.mipmap.ic_launcher).below(topLeftView)
+                .withImage(R.mipmap.ic_launcher).atop(topRightView)
+                .withImage(R.mipmap.ic_launcher).toLeftOf(topRightView)
+                .withImage(R.mipmap.ic_launcher).below(topRightView)
+                .withImage(R.mipmap.ic_launcher).atop(bottomLeftView)
+                .withImage(R.mipmap.ic_launcher).above(bottomLeftView)
+                .withImage(R.mipmap.ic_launcher).toRightOf(bottomLeftView)
+                .withImage(R.mipmap.ic_launcher).atop(bottomRightView)
+                .withImage(R.mipmap.ic_launcher).above(bottomRightView)
+                .withImage(R.mipmap.ic_launcher).toLeftOf(bottomRightView)
                 .show(true);
     }
 

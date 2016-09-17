@@ -4,5 +4,6 @@
     <string name="arrow_onboarding">Arrow</string>
     <string name="border_onboarding">Border</string>
     <string name="hole_onboarding">Hole</string>
+    <string name="image_onboarding">Image</string>
     <string name="clear_onboarding">Clear</string>
 </resources>

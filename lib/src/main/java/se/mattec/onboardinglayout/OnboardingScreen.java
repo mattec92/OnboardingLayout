@@ -12,6 +12,7 @@ import java.util.List;
 
 import se.mattec.onboardinglayout.elements.BorderOnboardingElement;
 import se.mattec.onboardinglayout.elements.HoleOnboardingElement;
+import se.mattec.onboardinglayout.elements.ImageOnboardingElement;
 import se.mattec.onboardinglayout.elements.OnboardingElement;
 import se.mattec.onboardinglayout.elements.TextOnboardingElement;
 import se.mattec.onboardinglayout.elements.TextWithArrowOnboardingElement;
@@ -72,6 +73,13 @@ public class OnboardingScreen
         HoleOnboardingElement holeOnboardingElement = new HoleOnboardingElement(this, circular);
         onboardingElements.add(holeOnboardingElement);
         return holeOnboardingElement;
+    }
+
+    public ImageOnboardingElement withImage(int imageResourceId)
+    {
+        ImageOnboardingElement imageOnboardingElement = new ImageOnboardingElement(this, imageResourceId);
+        onboardingElements.add(imageOnboardingElement);
+        return imageOnboardingElement;
     }
 
     public OnboardingScreen withOverlayColor(int backgroundColorResourceId)

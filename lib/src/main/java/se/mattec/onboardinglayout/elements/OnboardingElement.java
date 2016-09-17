@@ -47,7 +47,7 @@ public abstract class OnboardingElement
 
     public View create()
     {
-        View view = buildView();
+        view = buildView();
         positionView(view);
         return view;
     }

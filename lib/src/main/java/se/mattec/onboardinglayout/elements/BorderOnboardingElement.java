@@ -62,8 +62,6 @@ public class BorderOnboardingElement
             borderView.getBackground().setColorFilter(ContextCompat.getColor(context, onboardingScreen.getBorderColorResourceId()), PorterDuff.Mode.SRC_IN);
         }
 
-        view = borderView;
-
         return borderView;
     }
 

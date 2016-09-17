@@ -112,8 +112,6 @@ public class TextWithArrowOnboardingElement
 
         arrowContainer.setVisibility(View.INVISIBLE);
 
-        view = arrowContainer;
-
         return arrowContainer;
     }
 

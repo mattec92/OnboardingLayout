@@ -67,8 +67,6 @@ public class TextOnboardingElement
 
         textView.setVisibility(View.INVISIBLE);
 
-        view = textView;
-
         return textView;
     }
 

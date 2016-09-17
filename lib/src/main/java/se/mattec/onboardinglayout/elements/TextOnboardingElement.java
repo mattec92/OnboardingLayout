@@ -1,7 +1,6 @@
 package se.mattec.onboardinglayout.elements;
 
 import android.support.v4.content.ContextCompat;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.FrameLayout;

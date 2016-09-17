@@ -3,7 +3,6 @@ package se.mattec.onboardinglayout.elements;
 import android.graphics.PorterDuff;
 import android.support.v4.content.ContextCompat;
 import android.view.View;
-import android.widget.FrameLayout;
 
 import se.mattec.onboardinglayout.OnboardingScreen;
 import se.mattec.onboardinglayout.R;
@@ -71,19 +70,8 @@ public class BorderOnboardingElement
     @Override
     protected void positionView(View view)
     {
-        final int onboardingLayoutWidth = onboardingScreen.getOnboardingLayout().getWidth();
-        final int onboardingLayoutHeight = onboardingScreen.getOnboardingLayout().getHeight();
-
-        int viewToAlignWidth = right - left;
-        final int viewToAlignHeight = bottom - top;
-
-        final FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(viewToAlignWidth, viewToAlignHeight);
-
-        params.topMargin = top;
-        params.bottomMargin = onboardingLayoutHeight - bottom;
-        params.leftMargin = left;
-        params.rightMargin = onboardingLayoutWidth - right;
-
-        view.setLayoutParams(params);
+        int width = right - left;
+        int height = bottom - top;
+        positionAtop(view, width, height);
     }
 }

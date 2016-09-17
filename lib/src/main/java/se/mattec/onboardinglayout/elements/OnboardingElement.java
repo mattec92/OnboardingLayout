@@ -68,9 +68,9 @@ public abstract class OnboardingElement
 
     protected void positionAside(View viewToPosition)
     {
-        final int onboardingLayoutWidth = onboardingScreen.getOnboardingLayout().getWidth();
+        int onboardingLayoutWidth = onboardingScreen.getOnboardingLayout().getWidth();
 
-        final FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 
         switch (location)
         {
@@ -103,9 +103,25 @@ public abstract class OnboardingElement
         viewToPosition.setLayoutParams(params);
     }
 
-    protected void positionAtop(View viewToPosition)
+    protected void positionAtop(View viewToPosition, int width, int height)
     {
-        //TODO
+        int onboardingLayoutWidth = onboardingScreen.getOnboardingLayout().getWidth();
+        int onboardingLayoutHeight = onboardingScreen.getOnboardingLayout().getHeight();
+
+        int viewToAlignWidth = right - left;
+        int viewToAlignHeight = bottom - top;
+
+        int widthOffset = viewToAlignWidth - width;
+        int heightOffset = viewToAlignHeight - height;
+
+        final FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(width, height);
+
+        params.topMargin = top + heightOffset / 2;
+        params.bottomMargin = onboardingLayoutHeight - bottom - heightOffset / 2;
+        params.leftMargin = left + widthOffset / 2;
+        params.rightMargin = onboardingLayoutWidth - right - widthOffset / 2;
+
+        viewToPosition.setLayoutParams(params);
     }
 
 }

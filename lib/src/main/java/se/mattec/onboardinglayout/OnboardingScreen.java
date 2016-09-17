@@ -46,7 +46,7 @@ public class OnboardingScreen
         return textOnboardingElement;
     }
 
-    public TextOnboardingElement withTextAndArrow(String text, ArrowLocation arrowLocation)
+    public TextWithArrowOnboardingElement withTextAndArrow(String text, ArrowLocation arrowLocation)
     {
         TextWithArrowOnboardingElement textOnboardingElement = new TextWithArrowOnboardingElement(this, text, arrowLocation);
         onboardingElements.add(textOnboardingElement);
@@ -60,7 +60,7 @@ public class OnboardingScreen
         return borderOnboardingElement;
     }
 
-    public BorderOnboardingElement withDashedBorder( boolean isCircular)
+    public BorderOnboardingElement withDashedBorder(boolean isCircular)
     {
         BorderOnboardingElement borderOnboardingElement = new BorderOnboardingElement(this, true, isCircular);
         onboardingElements.add(borderOnboardingElement);

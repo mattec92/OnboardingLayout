@@ -44,6 +44,12 @@ Onboard
 
 Overlay background color, text color and border color are specified globally.
 
+`withOverlayColor(int backgroundColorResourceId)`
+
+`withTextColor(int textColorResourceId)`
+
+`withBorderColor(int borderColorResourceId)`
+
 #### Onboarding elements
 
 The following onboarding element types are available.

@@ -27,9 +27,11 @@ public class OnboardingScreen
     private List<OnboardingElement> onboardingElements;
     private Context context;
 
-    private int backgroundColorResourceId = -1;
+    private int backgroundColorResourceId = android.R.color.transparent;
     private int textColorResourceId = -1;
     private int borderColorResourceId = -1;
+
+    private View.OnClickListener onClickListener;
 
     private View backgroundView;
 
@@ -100,30 +102,54 @@ public class OnboardingScreen
         return this;
     }
 
+    public OnboardingScreen setOnClickListener(View.OnClickListener onClickListener)
+    {
+        this.onClickListener = onClickListener;
+        return this;
+    }
+
+    public OnboardingScreen clearOnClick(final boolean animate)
+    {
+        setOnClickListener(new View.OnClickListener()
+        {
+
+            @Override
+            public void onClick(View view)
+            {
+                OnboardingScreen.this.clear(animate);
+            }
+
+        });
+        return this;
+    }
+
+    public OnboardingScreen clearOnClick()
+    {
+        return clearOnClick(false);
+    }
+
     public OnboardingScreen show(boolean animate)
     {
-        if (backgroundColorResourceId != -1)
+        List<BackgroundView.HoleSpec> holeSpecs = new ArrayList<>();
+        for (OnboardingElement element : onboardingElements)
         {
-            List<BackgroundView.HoleSpec> holeSpecs = new ArrayList<>();
-            for (OnboardingElement element : onboardingElements)
+            if (element instanceof HoleOnboardingElement)
             {
-                if (element instanceof HoleOnboardingElement)
-                {
-                    holeSpecs.add(((HoleOnboardingElement) element).getHoleSpec());
-                }
+                holeSpecs.add(((HoleOnboardingElement) element).getHoleSpec());
             }
+        }
 
-            BackgroundView backgroundView = new BackgroundView(context);
-            backgroundView.setBackgroundColor(backgroundColorResourceId);
-            backgroundView.setHoleSpecs(holeSpecs);
-            backgroundView.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
-            onboardingLayout.addView(backgroundView);
-            this.backgroundView = backgroundView;
+        BackgroundView backgroundView = new BackgroundView(context);
+        backgroundView.setBackgroundResource(backgroundColorResourceId);
+        backgroundView.setHoleSpecs(holeSpecs);
+        backgroundView.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+        backgroundView.setOnClickListener(onClickListener);
+        onboardingLayout.addView(backgroundView);
+        this.backgroundView = backgroundView;
 
-            if (animate)
-            {
-                AnimationUtils.fadeIn(backgroundView);
-            }
+        if (animate)
+        {
+            AnimationUtils.fadeIn(backgroundView);
         }
 
         for (OnboardingElement element : onboardingElements)

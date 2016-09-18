@@ -50,6 +50,12 @@ Overlay background color, text color and border color are specified globally.
 
 `withBorderColor(int borderColorResourceId)`
 
+#### Handling clicks
+
+It is possible to set your own click listener to the onboarding overlay by using `setOnClickListener(View.OnClickListener onClickListener)`,
+
+For closing the onboarding overlay on click, use `clearOnClick(boolean animate)`.
+
 #### Onboarding elements
 
 The following onboarding element types are available.

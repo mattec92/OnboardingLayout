@@ -96,7 +96,8 @@ public class BackgroundView
         canvas.drawBitmap(bitmap, 0, 0, paint);
     }
 
-    public void setBackgroundColor(int backgroundResourceId)
+    @Override
+    public void setBackgroundResource(int backgroundResourceId)
     {
         backgroundPaint.setColor(ContextCompat.getColor(getContext(), backgroundResourceId));
     }

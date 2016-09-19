@@ -8,7 +8,23 @@ An Android library for creating custom onboarding overlays.
 
 ### Installing
 
-TBA
+OnboardingLayout is published on JCenter. Make sure it is included in your project level `build.gradle`.
+
+```groovy
+buildscript {
+    repositories {
+        jcenter()
+    }
+}
+```
+
+Then add the dependency in your module level `build.gradle`.
+
+```groovy
+dependencies {
+    compile 'se.mattec:onboardinglayout:0.0.1'
+}
+```
 
 ### XML
 

@@ -1,5 +1,7 @@
 # OnboardingLayout
 
+ [![Download](https://api.bintray.com/packages/mattec92/maven/OnboardingLayout/images/download.svg)](https://bintray.com/mattec92/maven/OnboardingLayout/_latestVersion) 
+
 An Android library for creating custom onboarding overlays.
 
 `Beware! This project is in an early development stage. Any public methods and behaviors are subject to change.`
@@ -22,7 +24,7 @@ Then add the dependency in your module level `build.gradle`.
 
 ```groovy
 dependencies {
-    compile 'se.mattec:onboardinglayout:0.0.1'
+    compile 'se.mattec:onboardinglayout:0.0.2'
 }
 ```
 

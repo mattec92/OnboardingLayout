@@ -3,10 +3,10 @@ package se.mattec.onboardinglayout.elements;
 import android.graphics.PorterDuff;
 import android.support.v4.content.ContextCompat;
 import android.view.View;
-import android.widget.Button;
 
 import se.mattec.onboardinglayout.OnboardingScreen;
 import se.mattec.onboardinglayout.enums.Location;
+import se.mattec.onboardinglayout.views.TightTextWrappingButton;
 
 public class ButtonOnboardingElement
         extends OnboardingElement
@@ -53,7 +53,7 @@ public class ButtonOnboardingElement
     @Override
     protected View buildView()
     {
-        Button button = new Button(context);
+        TightTextWrappingButton button = new TightTextWrappingButton(context);
         button.setText(text);
         button.setTextColor(ContextCompat.getColor(context, onboardingScreen.getButtonTextColorResourceId()));
         button.getBackground().setColorFilter(ContextCompat.getColor(context, onboardingScreen.getButtonBackgroundColorResourceId()), PorterDuff.Mode.SRC_IN);

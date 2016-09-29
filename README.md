@@ -68,6 +68,10 @@ Overlay background color, text color and border color are specified globally.
 
 `withBorderColor(int borderColorResourceId)`
 
+`withButtonTextColor(int buttonTextColorResourceId)`
+
+`withButtonBackgroundColor(int buttonBackgroundColorResourceId)`
+
 #### Handling clicks
 
 It is possible to set your own click listener to the onboarding overlay by using `setOnClickListener(View.OnClickListener onClickListener)`,
@@ -138,6 +142,17 @@ Depending on the placement, different arrow locations are available. Illegal com
 * toLeftOf
 * toRightOf
 * atop
+
+##### Button
+
+`withButton(String text, View.OnClickListener onClickListener)`
+
+###### Allowed placements
+
+* above
+* below
+* toLeftOf
+* toRightOf
 
 ## Sample application
 

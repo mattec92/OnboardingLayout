@@ -71,10 +71,10 @@ public class TextOnboardingElement
     }
 
     @Override
-    protected void positionView(final View viewToPosition)
+    protected void positionView(final View view)
     {
-        positionAside(viewToPosition);
-        alignViewToAlignCenter(viewToPosition);
+        positionAside(view);
+        alignViewToAlignCenter(view);
     }
 
 }

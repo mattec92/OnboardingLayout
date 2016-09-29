@@ -116,10 +116,10 @@ public class TextWithArrowOnboardingElement
     }
 
     @Override
-    protected void positionView(View viewToPosition)
+    protected void positionView(View view)
     {
-        positionAside(viewToPosition);
-        alignArrowAtViewToAlignCenter(viewToPosition);
+        positionAside(view);
+        alignArrowAtViewToAlignCenter(view);
     }
 
     private void alignArrowAtViewToAlignCenter(final View viewToPosition)

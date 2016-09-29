@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import se.mattec.onboardinglayout.elements.BorderOnboardingElement;
+import se.mattec.onboardinglayout.elements.ButtonOnboardingElement;
 import se.mattec.onboardinglayout.elements.HoleOnboardingElement;
 import se.mattec.onboardinglayout.elements.ImageOnboardingElement;
 import se.mattec.onboardinglayout.elements.OnboardingElement;
@@ -30,6 +31,8 @@ public class OnboardingScreen
     private int backgroundColorResourceId = android.R.color.transparent;
     private int textColorResourceId = -1;
     private int borderColorResourceId = -1;
+    private int buttonTextColorResourceId = -1;
+    private int buttonBackgroundColorResourceId = -1;
 
     private View.OnClickListener onClickListener;
 
@@ -84,6 +87,13 @@ public class OnboardingScreen
         return imageOnboardingElement;
     }
 
+    public ButtonOnboardingElement withButton(String text, View.OnClickListener onClickListener)
+    {
+        ButtonOnboardingElement buttonOnboardingElement = new ButtonOnboardingElement(this, text, onClickListener);
+        onboardingElements.add(buttonOnboardingElement);
+        return buttonOnboardingElement;
+    }
+
     public OnboardingScreen withOverlayColor(int backgroundColorResourceId)
     {
         this.backgroundColorResourceId = backgroundColorResourceId;
@@ -99,6 +109,18 @@ public class OnboardingScreen
     public OnboardingScreen withBorderColor(int borderColorResourceId)
     {
         this.borderColorResourceId = borderColorResourceId;
+        return this;
+    }
+
+    public OnboardingScreen withButtonTextColor(int buttonTextColorResourceId)
+    {
+        this.buttonTextColorResourceId = buttonTextColorResourceId;
+        return this;
+    }
+
+    public OnboardingScreen withButtonBackgroundColor(int buttonBackgroundColorResourceId)
+    {
+        this.buttonBackgroundColorResourceId = buttonBackgroundColorResourceId;
         return this;
     }
 
@@ -247,6 +269,16 @@ public class OnboardingScreen
     public int getBorderColorResourceId()
     {
         return borderColorResourceId;
+    }
+
+    public int getButtonTextColorResourceId()
+    {
+        return buttonTextColorResourceId;
+    }
+
+    public int getButtonBackgroundColorResourceId()
+    {
+        return buttonBackgroundColorResourceId;
     }
 
 }

@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import se.mattec.onboardinglayout.Onboard;
 import se.mattec.onboardinglayout.OnboardingScreen;
@@ -98,6 +99,15 @@ public class MainActivity
                     onboardingScreen.clear(true);
                 }
                 openImageOnboarding();
+                break;
+            }
+            case R.id.button:
+            {
+                if (onboardingScreen != null)
+                {
+                    onboardingScreen.clear(true);
+                }
+                openButtonOnboarding();
                 break;
             }
             case R.id.clear:
@@ -201,6 +211,36 @@ public class MainActivity
                 .withImage(R.mipmap.ic_launcher).atop(bottomRightView)
                 .withImage(R.mipmap.ic_launcher).above(bottomRightView)
                 .withImage(R.mipmap.ic_launcher).toLeftOf(bottomRightView)
+                .show(true);
+    }
+
+    private void openButtonOnboarding()
+    {
+        onboardingScreen = Onboard.in(onboardingLayout)
+                .withOverlayColor(R.color.black_trans)
+                .withButtonTextColor(R.color.white)
+                .withButtonBackgroundColor(R.color.red)
+                .withButton("Above the center", new View.OnClickListener()
+                {
+
+                    @Override
+                    public void onClick(View view)
+                    {
+                        Toast.makeText(MainActivity.this, "Button clicked", Toast.LENGTH_SHORT).show();
+                    }
+
+                }).above(centerView)
+                .withButton("Below the center", null).below(centerView)
+                .withButton("To left of the center\nTwo lines", null).toLeftOf(centerView)
+                .withButton("To right of the center", null).toRightOf(centerView)
+                .withButton("Right of top left", null).toRightOf(topLeftView)
+                .withButton("Below top left", null).below(topLeftView)
+                .withButton("Left of top right", null).toLeftOf(topRightView)
+                .withButton("Below top right", null).below(topRightView)
+                .withButton("Above bottom left", null).above(bottomLeftView)
+                .withButton("Right bottom left", null).toRightOf(bottomLeftView)
+                .withButton("Above bottom right", null).above(bottomRightView)
+                .withButton("Left bottom right", null).toLeftOf(bottomRightView)
                 .show(true);
     }
 

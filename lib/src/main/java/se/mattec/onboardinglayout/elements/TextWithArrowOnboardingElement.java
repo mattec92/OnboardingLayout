@@ -47,7 +47,7 @@ public class TextWithArrowOnboardingElement
                         arrowContainer = inflater.inflate(R.layout.text_with_arrow_below_middle, null, false);
                         break;
                     default:
-                        throw new IllegalArgumentException("Arrow location " + arrowLocation + " undefined when positioned below.");
+                        throw new IllegalArgumentException("Arrow location " + arrowLocation + " undefined when positioned above.");
                 }
                 break;
             }
@@ -65,7 +65,7 @@ public class TextWithArrowOnboardingElement
                         arrowContainer = inflater.inflate(R.layout.text_with_arrow_above_middle, null, false);
                         break;
                     default:
-                        throw new IllegalArgumentException("Arrow location " + arrowLocation + " undefined when positioned above.");
+                        throw new IllegalArgumentException("Arrow location " + arrowLocation + " undefined when positioned below.");
                 }
                 break;
             }
@@ -95,7 +95,7 @@ public class TextWithArrowOnboardingElement
                         arrowContainer = inflater.inflate(R.layout.text_with_arrow_bottom_left, null, false);
                         break;
                     default:
-                        throw new IllegalArgumentException("Arrow location " + arrowLocation + " undefined when positioned toLeftOf.");
+                        throw new IllegalArgumentException("Arrow location " + arrowLocation + " undefined when positioned toRightOf.");
                 }
                 break;
             }

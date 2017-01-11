@@ -36,14 +36,18 @@ public abstract class OnboardingElement
     {
         viewToAlign = view;
 
+        View nextView = view;
+
         do
         {
-            top += view.getTop();
-            bottom += view.getBottom();
-            left += view.getLeft();
-            right += view.getRight();
+            top += nextView.getTop();
+            left += nextView.getLeft();
+            nextView = (View) nextView.getParent();
         }
-        while (view.getParent() != onboardingScreen.getOnboardingLayout());
+        while (nextView != null && nextView != onboardingScreen.getOnboardingLayout());
+
+        bottom = top + view.getHeight();
+        right = left + view.getWidth();
     }
 
     public View create()

@@ -4,10 +4,13 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.graphics.Point;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
+import android.view.Display;
+import android.view.WindowManager;
 import android.widget.FrameLayout;
 
 import java.util.List;
@@ -48,7 +51,12 @@ public class BackgroundView
     {
         setWillNotDraw(false);
 
-        bitmap = Bitmap.createBitmap(1080, 1920, Bitmap.Config.ARGB_8888);
+        WindowManager wm = (WindowManager) getContext().getSystemService(Context.WINDOW_SERVICE);
+        Display display = wm.getDefaultDisplay();
+        Point size = new Point();
+        display.getSize(size);
+
+        bitmap = Bitmap.createBitmap(size.x, size.y, Bitmap.Config.ARGB_8888);
         tempCanvas = new Canvas(bitmap);
         paint = new Paint();
         backgroundPaint = new Paint();

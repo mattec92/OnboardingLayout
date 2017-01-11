@@ -47,7 +47,12 @@ public class OnboardingScreen
 
     public TextOnboardingElement withText(String text)
     {
-        TextOnboardingElement textOnboardingElement = new TextOnboardingElement(this, text);
+        return withText(text, null);
+    }
+
+    public TextOnboardingElement withText(String text, TextOnboardingElement.Settings settings)
+    {
+        TextOnboardingElement textOnboardingElement = new TextOnboardingElement(this, text, settings);
         onboardingElements.add(textOnboardingElement);
         return textOnboardingElement;
     }

@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 import se.mattec.onboardinglayout.Onboard;
 import se.mattec.onboardinglayout.OnboardingScreen;
+import se.mattec.onboardinglayout.elements.TextOnboardingElement;
 import se.mattec.onboardinglayout.enums.ArrowLocation;
 import se.mattec.onboardinglayout.views.OnboardingLayout;
 
@@ -128,7 +129,7 @@ public class MainActivity
                 .withOverlayColor(R.color.black_trans)
                 .withTextColor(R.color.white)
                 .clearOnClick(true)
-                .withText("Above the center").above(centerView)
+                .withText("Above the center", new TextOnboardingElement.Settings().textColor(R.color.red)).above(centerView)
                 .withText("Below the center").below(centerView)
                 .withText("To left of the center\nTwo lines").toLeftOf(centerView)
                 .withText("To right of the center").toRightOf(centerView)

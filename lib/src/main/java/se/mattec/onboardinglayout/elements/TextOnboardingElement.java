@@ -13,11 +13,13 @@ public class TextOnboardingElement
 {
 
     protected String text;
+    protected Settings settings;
 
-    public TextOnboardingElement(OnboardingScreen onboardingScreen, String text)
+    public TextOnboardingElement(OnboardingScreen onboardingScreen, String text, Settings settings)
     {
         super(onboardingScreen);
         this.text = text;
+        this.settings = settings;
     }
 
     public OnboardingScreen above(View view)
@@ -58,6 +60,8 @@ public class TextOnboardingElement
 
         textView.setText(text);
 
+        //TODO: Apply settings, with fallback to global settings and library default.
+
         if (onboardingScreen.getTextColorResourceId() != -1)
         {
             textView.setTextColor(ContextCompat.getColor(context, onboardingScreen.getTextColorResourceId()));
@@ -73,6 +77,26 @@ public class TextOnboardingElement
     {
         positionAside(view);
         alignViewToAlignCenter(view);
+    }
+
+    public static class Settings
+    {
+
+        private int textSize = -1;
+        private int textColorResourceId = -1;
+
+        public Settings textSize(int textSize)
+        {
+            this.textSize = textSize;
+            return this;
+        }
+
+        public Settings textColor(int textColorResourceId)
+        {
+            this.textColorResourceId = textColorResourceId;
+            return this;
+        }
+
     }
 
 }

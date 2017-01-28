@@ -15,8 +15,8 @@ ext {
     siteUrl = 'https://github.com/mattec92/OnboardingLayout'
     gitUrl = 'https://github.com/mattec92/OnboardingLayout.git'
 
-    libraryVersionCode = 2
-    libraryVersionName = '0.0.2'
+    libraryVersionCode = 3
+    libraryVersionName = '0.0.3'
 
     developerId = 'mattec92'
     developerName = 'Mattias Cederlund'
